@@ -9,8 +9,11 @@ namespace Xem_Ngay.model.dia_chi
 {
     class Dau : DiaChi
     {
-        public String ten = "Dậu";
 
+        public Dau()
+        {
+            this.ten = "Dậu";
+        }
         public override DiaChi lucHai()
         {
             return DiaChiInstance.TUAT;

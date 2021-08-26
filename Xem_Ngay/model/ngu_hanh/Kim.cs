@@ -8,25 +8,28 @@ namespace Xem_Ngay.model
 {
     class Kim : NguHanh
     {
-        public String ten = "Kim";
+        public Kim()
+        {
+            this.ten = "Kim";
+        }
 
         // --------------- Ngũ hành sinh khắc ----------------------------
-        public NguHanh biKhacBoi()
+        public override NguHanh biKhacBoi()
         {
             return NguHanhInstance.HOA;
         }
 
-        public NguHanh duocSinhBoi()
+        public override NguHanh duocSinhBoi()
         {
             return NguHanhInstance.THO;
         }
 
-        public NguHanh khac()
+        public override NguHanh khac()
         {
             return NguHanhInstance.MOC;
         }
 
-        public NguHanh sinh()
+        public override NguHanh sinh()
         {
             return NguHanhInstance.THUY;
         }

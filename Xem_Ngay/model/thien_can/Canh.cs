@@ -8,7 +8,11 @@ namespace Xem_Ngay.model.thien_can
 {
     class Canh : ThienCan
     {
-        public readonly String ten = "Canh";
+        public Canh()
+        {
+            this.sothutu = 7;
+            this.ten = "Canh";
+        }
         public override NguHanh nguHanh()
         {
             return NguHanhInstance.KIM;

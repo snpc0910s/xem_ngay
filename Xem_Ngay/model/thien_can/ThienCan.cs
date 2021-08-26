@@ -7,7 +7,9 @@ namespace Xem_Ngay.model
 {
    public abstract class ThienCan
     {
-        protected String ten;
+
+        public int sothutu;
+        public String ten;
 
         public abstract NguHanh nguHanh();
 

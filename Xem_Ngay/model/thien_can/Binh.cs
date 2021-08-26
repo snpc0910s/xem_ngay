@@ -8,7 +8,11 @@ namespace Xem_Ngay.model.thien_can
 {
     class Binh : ThienCan
     {
-        public readonly String ten = "Bính";
+        public Binh()
+        {
+            this.sothutu = 3;
+            this.ten = "Bính";
+        }
         public override NguHanh nguHanh()
         {
             return NguHanhInstance.HOA;

@@ -51,6 +51,21 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="model\64que\AllQueDich.cs" />
+    <Compile Include="model\64que\LogicHelper.cs" />
+    <Compile Include="model\64que\Que.cs" />
+    <Compile Include="model\am_duong\AmDuong.cs" />
+    <Compile Include="model\bat_quai\BatQuai.cs" />
+    <Compile Include="model\bat_quai\BatQuaiInstance.cs" />
+    <Compile Include="model\bat_quai\QuaiChan.cs" />
+    <Compile Include="model\bat_quai\QuaiCan.cs" />
+    <Compile Include="model\bat_quai\QuaiCanas.cs" />
+    <Compile Include="model\bat_quai\QuaiDoai.cs" />
+    <Compile Include="model\bat_quai\QuaiKham.cs" />
+    <Compile Include="model\bat_quai\QuaiKhon.cs" />
+    <Compile Include="model\bat_quai\QuaiLy.cs" />
+    <Compile Include="model\bat_quai\QuaiTon.cs" />
+    <Compile Include="model\dia_chi\All12DiaChi.cs" />
     <Compile Include="model\dia_chi\Dan.cs" />
     <Compile Include="model\dia_chi\Dau.cs" />
     <Compile Include="model\dia_chi\DiaChi.cs" />
@@ -65,11 +80,13 @@
     <Compile Include="model\dia_chi\Ti.cs" />
     <Compile Include="model\dia_chi\Tuat.cs" />
     <Compile Include="model\dia_chi\Ty.cs" />
+    <Compile Include="model\luc_thap_hoa_giap\LucThapHoaGiap.cs" />
     <Compile Include="model\ngu_hanh\Hoa.cs" />
     <Compile Include="model\ngu_hanh\Kim.cs" />
     <Compile Include="model\ngu_hanh\Moc.cs" />
     <Compile Include="model\ngu_hanh\NguHanh.cs" />
     <Compile Include="model\ngu_hanh\NguHanhInstance.cs" />
+    <Compile Include="model\thien_can\All10ThienCan.cs" />
     <Compile Include="model\thien_can\At.cs" />
     <Compile Include="model\thien_can\Binh.cs" />
     <Compile Include="model\thien_can\Canh.cs" />
@@ -110,6 +127,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ultility\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="resource\img\bat_quai\can.PNG" />
+    <Content Include="resource\img\bat_quai\cana.PNG" />
+    <Content Include="resource\img\bat_quai\chan.PNG" />
+    <Content Include="resource\img\bat_quai\doai.PNG" />
+    <Content Include="resource\img\bat_quai\kham.PNG" />
+    <Content Include="resource\img\bat_quai\khon.PNG" />
+    <Content Include="resource\img\bat_quai\ly.PNG" />
+    <Content Include="resource\img\bat_quai\ton.PNG" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

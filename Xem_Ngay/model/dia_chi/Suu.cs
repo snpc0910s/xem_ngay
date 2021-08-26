@@ -9,7 +9,10 @@ namespace Xem_Ngay.model.dia_chi
 {
     public class Suu : DiaChi
     {
-        public String ten = "Sửu";
+        public Suu()
+        {
+            this.ten = "Sửu";
+        }
         public override DiaChi lucHai()
         {
             return DiaChiInstance.NGO;

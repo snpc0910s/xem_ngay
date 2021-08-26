@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Xem_Ngay.common;
+using Xem_Ngay.model;
 using Xem_Ngay.model.ngu_hanh;
 
 namespace Xem_Ngay.model.dia_chi
 {
     class Dan : DiaChi
     {
-        public String ten = "Dần";
+        public Dan() {
+            this.ten = "Dần";
+        }
+
         public override DiaChi lucHai()
         {
             return DiaChiInstance.TY;

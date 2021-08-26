@@ -5,14 +5,16 @@ using System.Text;
 
 namespace Xem_Ngay.model.ngu_hanh
 {
-    public interface NguHanh
+    public abstract class NguHanh
     {
-        NguHanh sinh();
-        NguHanh khac();
+        public string ten;
 
-        NguHanh biKhacBoi();
+        public abstract NguHanh sinh();
+        public abstract NguHanh khac();
 
-        NguHanh duocSinhBoi();
+        public abstract NguHanh biKhacBoi();
+         
+        public abstract NguHanh duocSinhBoi();
 
     }
 }

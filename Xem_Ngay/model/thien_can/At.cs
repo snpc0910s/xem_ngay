@@ -8,7 +8,11 @@ namespace Xem_Ngay.model.thien_can
 {
     public class At : ThienCan
     {
-        public readonly String ten = "Ất";
+        public At()
+        {
+            this.sothutu = 2;
+            this.ten = "Ất";
+        }
         public override NguHanh nguHanh()
         {
             return NguHanhInstance.MOC;

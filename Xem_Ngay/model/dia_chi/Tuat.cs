@@ -10,7 +10,10 @@ namespace Xem_Ngay.model.dia_chi
     class Tuat : DiaChi
     {
 
-        public String ten = "Tuất";
+        public Tuat()
+        {
+            this.ten = "Tuất";
+        }
         public override DiaChi lucHai()
         {
             return DiaChiInstance.DAU;

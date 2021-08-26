@@ -9,8 +9,8 @@ namespace Xem_Ngay.model
 {
     public abstract class DiaChi
     {
-        protected String ten;
-
+        public String ten;
+        
         public abstract NguHanh nguHanh();
 
         public abstract DiaChi nhiHop();
