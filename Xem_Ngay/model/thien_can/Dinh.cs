@@ -11,7 +11,7 @@ namespace Xem_Ngay.model.thien_can
         public Dinh()
         {
             this.sothutu = 4;
-            this.ten = "Dinh";
+            this.ten = "Đinh";
         }
         public override NguHanh nguHanh()
         {

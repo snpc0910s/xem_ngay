@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Xem_Ngay.model._64que;
-
+using Xem_Ngay.model.luc_thap_hoa_giap;
 namespace Xem_Ngay
 {
     public partial class Form1 : Form
@@ -39,17 +39,16 @@ namespace Xem_Ngay
                 return;
             }
             this.logTextBox.Text = "";
-            List<Que> lstQue = AllQueDich.timQueBangTen(input);
-            if (lstQue.Count == 0) {
-                this.logTextBox.Text = "Qủe không tồn tại";
+            List<HoaGiap> lstHoaGiap = LucThapHoaGiap.timHoaGiapByTen(input);
+            if (lstHoaGiap.Count == 0) {
+                this.logTextBox.Text = "Hoa Giáp không tồn tại";
             } else
             {
-                this.logTextBox.AppendText("Total: " + lstQue.Count);
+                this.logTextBox.AppendText("Total: " + lstHoaGiap.Count);
                 this.logTextBox.AppendText(Environment.NewLine);
-                foreach (Que que in lstQue)
+                foreach (HoaGiap hoaGiap in lstHoaGiap)
                 {
-                    String out1Que = "Tên: " + que.ten + "  Quái Khí: " + que.quaiKhi + "  Quái Vận: " + que.quaiVan;
-                    this.logTextBox.AppendText(out1Que);
+                    this.logTextBox.AppendText(hoaGiap.toString());
                     this.logTextBox.AppendText(Environment.NewLine);
                 }
             }

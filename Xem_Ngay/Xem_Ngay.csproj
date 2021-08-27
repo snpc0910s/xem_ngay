@@ -80,12 +80,14 @@
     <Compile Include="model\dia_chi\Ti.cs" />
     <Compile Include="model\dia_chi\Tuat.cs" />
     <Compile Include="model\dia_chi\Ty.cs" />
+    <Compile Include="model\luc_thap_hoa_giap\HoaGiap.cs" />
     <Compile Include="model\luc_thap_hoa_giap\LucThapHoaGiap.cs" />
     <Compile Include="model\ngu_hanh\Hoa.cs" />
     <Compile Include="model\ngu_hanh\Kim.cs" />
     <Compile Include="model\ngu_hanh\Moc.cs" />
     <Compile Include="model\ngu_hanh\NguHanh.cs" />
     <Compile Include="model\ngu_hanh\NguHanhInstance.cs" />
+    <Compile Include="model\ngu_hanh\UnknownNguHanh.cs" />
     <Compile Include="model\thien_can\All10ThienCan.cs" />
     <Compile Include="model\thien_can\At.cs" />
     <Compile Include="model\thien_can\Binh.cs" />
@@ -126,6 +128,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="ui_layout\dialog\" />
+    <Folder Include="ui_layout\panel\" />
     <Folder Include="ultility\" />
   </ItemGroup>
   <ItemGroup>

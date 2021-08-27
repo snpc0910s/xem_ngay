@@ -12,5 +12,7 @@ namespace Xem_Ngay.model.ngu_hanh
         public static readonly NguHanh THO = new Tho();
         public static readonly NguHanh MOC = new Moc();
         public static readonly NguHanh THUY = new Thuy();
+
+        public static readonly NguHanh UNKNOWN = new UnknownNguHanh();
     }
 }

@@ -32,5 +32,10 @@ namespace Xem_Ngay.model._64que
             this.quaiVan = quaiVan;
             return this;
         }
+
+        public String toLog()
+        {
+            return this.quaiKhi + " " + this.ten + " " + quaiVan;
+        }
     }
 }

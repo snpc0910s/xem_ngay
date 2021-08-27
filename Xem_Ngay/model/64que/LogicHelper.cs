@@ -70,16 +70,16 @@ namespace Xem_Ngay.model._64que
             }
             // không đổi
             if (chooseDifferent == true) {
-                if (position == 3) return 5;
+                if (position == 3) return 2;
                 if (position == 2) return 3;
-                if (position == 1) return 2;
+                if (position == 1) return 5;
             }
             // đổi
             if (chooseDifferent == false)
             {
-                if (position == 3) return 6;
+                if (position == 3) return 8;
                 if (position == 2) return 7;
-                if (position == 1) return 8;
+                if (position == 1) return 6;
             }
             return 0;
         }
