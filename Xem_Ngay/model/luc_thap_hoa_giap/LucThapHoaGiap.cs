@@ -5,6 +5,7 @@ using System.Text;
 using Xem_Ngay.model.thien_can;
 using Xem_Ngay.model.dia_chi;
 using Xem_Ngay.model._64que;
+using Xem_Ngay.ultility;
 
 namespace Xem_Ngay.model.luc_thap_hoa_giap
 {
@@ -85,6 +86,22 @@ namespace Xem_Ngay.model.luc_thap_hoa_giap
 
         public static readonly List<HoaGiap> ALL60HOAGIAP = new List<HoaGiap>() { QUY_TI, TAN_TI, KY_TI, DINH_TI, AT_TI, NHAM_THIN, CANH_THIN, MAU_THIN, BINH_THIN, GIAP_THIN, QUY_MAO, TAN_MAO, KY_MAO, DINH_MAO, AT_MAO, NHAM_DAN, CANH_DAN, MAU_DAN, BINH_DAN, GIAP_DAN, QUY_SUU, TAN_SUU, KY_SUU, DINH_SUU, AT_SUU, NHAM_TY, CANH_TY, MAU_TY, BINH_TY, GIAP_TY, GIAP_NGO, BINH_NGO, MAU_NGO, CANH_NGO, NHAM_NGO, AT_MUI, DINH_MUI, KY_MUI, TAN_MUI, QUY_MUI, GIAP_THAN, BINH_THAN, MAU_THAN, CANH_THAN, NHAM_THAN, AT_DAU, DINH_DAU, KY_DAU, TAN_DAU, QUY_DAU, GIAP_TUAT, BINH_TUAT, MAU_TUAT, CANH_TUAT, NHAM_TUAT, AT_HOI, DINH_HOI, KY_HOI, TAN_HOI, QUY_HOI };
 
+
+        public static readonly Map<int, String> MAP_STT_STRING_THIEN_CAN = new Map<int, String>()
+                                                                        .withValue(1, "Giáp").withValue(2, "Ất")
+                                                                        .withValue(3, "Bính").withValue(4, "Đinh")
+                                                                        .withValue(5, "Mậu").withValue(6, "Kỷ")
+                                                                        .withValue(7, "Canh").withValue(8, "Tân")
+                                                                        .withValue(9, "Nhâm").withValue(10, "Quý");
+
+        public static readonly Map<int, String> MAP_STT_STRING_DIACHI = new Map<int, String>()
+                                                                                .withValue(1, "Tý").withValue(2, "Sửu")
+                                                                                .withValue(3, "Dần").withValue(4, "Mão")
+                                                                                .withValue(5, "Thìn").withValue(6, "Tị")
+                                                                                .withValue(7, "Ngọ").withValue(8, "Mùi")
+                                                                                .withValue(9, "Thân").withValue(10, "Dậu")
+                                                                                .withValue(11, "Tuất").withValue(12, "Hợi");
+
         public static List<HoaGiap> timHoaGiapByTen(String ten)
         {
             ten = ten.ToLower();
@@ -92,6 +109,40 @@ namespace Xem_Ngay.model.luc_thap_hoa_giap
             foreach(HoaGiap hoaGiap in ALL60HOAGIAP)
             {
                 if (hoaGiap.ten.ToLower().IndexOf(ten) > -1) result.Add(hoaGiap);
+            }
+            return result;
+        }
+        public static HoaGiap timChinhXacDauTien(String ten)
+        {
+            ten = ten.ToLower();
+            foreach (HoaGiap hoaGiap in ALL60HOAGIAP)
+            {
+                if (hoaGiap.ten.ToLower().IndexOf(ten) > -1) return hoaGiap;
+            }
+            return null;
+        }
+        public static List<HoaGiapDonGian> listHoaGiapToHoaGiapDonGian(List<HoaGiap> lstHoaGiap)
+        {
+            List<HoaGiapDonGian> result = new List<HoaGiapDonGian>();
+            foreach (HoaGiap hoaGiap in lstHoaGiap)
+            {
+                List<HoaGiapDonGian> lstSimple = hoaGiap.toHoaGiapDonGian();
+                foreach (HoaGiapDonGian dongian in lstSimple) {
+                    result.Add(dongian);
+                }
+            }
+            return result;
+        }
+        public static List<String[]> listHoaGiapToRowTable(List<HoaGiap> lstHoaGiap)
+        {
+            List<String[]> result = new List<String[]>();
+            foreach (HoaGiap hoaGiap in lstHoaGiap)
+            {
+                List<HoaGiapDonGian> lstSimple = hoaGiap.toHoaGiapDonGian();
+                foreach (HoaGiapDonGian dongian in lstSimple)
+                {
+                    result.Add(dongian.toRowDataTable());
+                }
             }
             return result;
         }

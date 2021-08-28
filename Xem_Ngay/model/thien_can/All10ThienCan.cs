@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Xem_Ngay.model.am_duong;
 
+
 namespace Xem_Ngay.model.thien_can
 {
     class All10ThienCan
@@ -12,6 +13,8 @@ namespace Xem_Ngay.model.thien_can
 
         public static readonly List<String> LST_TEN_THIEN_CAN_AM = new List<String> { "Ất","Đinh","Kỷ","Tân","Quý"};
         public static readonly List<String> LST_TEN_THIEN_CAN_DUONG = new List<String> { "Giáp","Bính","Mậu","Canh","Nhâm"};
+
+
 
         public static String layAmDuongThienCan(ThienCan thienCan)
         {

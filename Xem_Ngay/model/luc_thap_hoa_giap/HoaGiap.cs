@@ -38,6 +38,16 @@ namespace Xem_Ngay.model.luc_thap_hoa_giap
             }
             return sb.ToString();
         }
+        public List<HoaGiapDonGian> toHoaGiapDonGian()
+        {
+            List<HoaGiapDonGian> results = new List<HoaGiapDonGian>();
+            results.Add(new HoaGiapDonGian(this.ten,this.ques[0].quaiKhi, this.ques[0].ten, this.ques[0].quaiVan));
+            if(this.ques.Count == 2)
+            {
+                results.Add(new HoaGiapDonGian(this.ten, this.ques[1].quaiKhi, this.ques[1].ten, this.ques[1].quaiVan));
+            }
+            return results;
+        }
 
         private NguHanh tinhNguHanhNapAm()
         {
@@ -70,5 +80,68 @@ namespace Xem_Ngay.model.luc_thap_hoa_giap
                 default: return NguHanhInstance.UNKNOWN;
             }
         }
+        // lay 12 tháng từ thiên can
+        public List<HoaGiap> lay12Thang()
+        {
+            String th = this.thienCan.ten;
+            String di = this.diaChi.ten;
+            int sttThienCan = LucThapHoaGiap.MAP_STT_STRING_THIEN_CAN.findFirstKeyByValue(th);
+            int sttDiaChi = LucThapHoaGiap.MAP_STT_STRING_DIACHI.findFirstKeyByValue(di);
+
+            int start = (sttThienCan * 2 + 1) % 10;
+            int[] arrayMatchDiaChi = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
+            int point = 2; // Dần
+            for(int i = 0; i < 12; i++)
+            {
+                arrayMatchDiaChi[point] = start;
+                point++;
+                start++;
+                point = point % 12;
+                start = start % 10;
+                if (start == 0) start = 10;
+            }
+            List<HoaGiap> result = new List<HoaGiap>();
+            for(int i = 0; i < 12; i++)
+            {
+                String eThienCan = LucThapHoaGiap.MAP_STT_STRING_THIEN_CAN.get(arrayMatchDiaChi[i]);
+                String eDiaChi = LucThapHoaGiap.MAP_STT_STRING_DIACHI.get(i + 1);
+                HoaGiap hoaGiap = LucThapHoaGiap.timChinhXacDauTien(eThienCan + " " + eDiaChi);
+                result.Add(hoaGiap);
+            }
+            return result;
+        }
+        // lấy 12 giờ từ thiên can
+        public List<HoaGiap> lay12Gio()
+        {
+            String th = this.thienCan.ten;
+            String di = this.diaChi.ten;
+            int sttThienCan = LucThapHoaGiap.MAP_STT_STRING_THIEN_CAN.findFirstKeyByValue(th);
+            int sttDiaChi = LucThapHoaGiap.MAP_STT_STRING_DIACHI.findFirstKeyByValue(di);
+
+            int start = (sttThienCan * 2 - 1) % 10;
+            int[] arrayMatchDiaChi = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
+            int point = 0; // Dần
+            for (int i = 0; i < 12; i++)
+            {
+                arrayMatchDiaChi[point] = start;
+                point++;
+                start++;
+                point = point % 12;
+                start = start % 10;
+                if (start == 0) start = 10;
+            }
+            List<HoaGiap> result = new List<HoaGiap>();
+            for (int i = 0; i < 12; i++)
+            {
+                String eThienCan = LucThapHoaGiap.MAP_STT_STRING_THIEN_CAN.get(arrayMatchDiaChi[i]);
+                String eDiaChi = LucThapHoaGiap.MAP_STT_STRING_DIACHI.get(i + 1);
+                HoaGiap hoaGiap = LucThapHoaGiap.timChinhXacDauTien(eThienCan + " " + eDiaChi);
+                result.Add(hoaGiap);
+            }
+            return result;
+        }
+        
     }
 }

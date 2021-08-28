@@ -81,6 +81,7 @@
     <Compile Include="model\dia_chi\Tuat.cs" />
     <Compile Include="model\dia_chi\Ty.cs" />
     <Compile Include="model\luc_thap_hoa_giap\HoaGiap.cs" />
+    <Compile Include="model\luc_thap_hoa_giap\HoaGiapDonGian.cs" />
     <Compile Include="model\luc_thap_hoa_giap\LucThapHoaGiap.cs" />
     <Compile Include="model\ngu_hanh\Hoa.cs" />
     <Compile Include="model\ngu_hanh\Kim.cs" />
@@ -105,6 +106,7 @@
     <Compile Include="model\thien_can\ThienCanInstance.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ultility\Map.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -128,9 +130,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="resource\icon\" />
     <Folder Include="ui_layout\dialog\" />
     <Folder Include="ui_layout\panel\" />
-    <Folder Include="ultility\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="resource\img\bat_quai\can.PNG" />
