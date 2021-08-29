@@ -189,6 +189,15 @@ namespace Xem_Ngay
             this.kqNamQue.Text = dongian.tenQue;
             this.kqNamVanKhi.Text = dongian.quaiVan + "";
             this.kqNamVanKhi.ForeColor = this.mauSacTheoHKDQ(dongian.quaiVan);
+            Que que =  AllQueDich.MAPPING_TEN_QUE_VS_QUE.get(dongian.tenQue);
+            if (que.isPhuMauQue())
+            {
+                if (que.layAmDuongQue() == true) this.kqNamStatus.Text = "quẻ Dương";
+                else this.kqNamStatus.Text = "quẻ Âm";
+            }else
+            {
+                this.kqNamStatus.Text = "--";
+            }
         }
         private void updateKetQuaThang(HoaGiapDonGian dongian)
         {
@@ -198,6 +207,16 @@ namespace Xem_Ngay
             this.kqThangQue.Text = dongian.tenQue;
             this.kqThangVanKhi.Text = dongian.quaiVan + "";
             this.kqThangVanKhi.ForeColor = this.mauSacTheoHKDQ(dongian.quaiVan);
+            Que que = AllQueDich.MAPPING_TEN_QUE_VS_QUE.get(dongian.tenQue);
+            if (que.isPhuMauQue())
+            {
+                if (que.layAmDuongQue() == true) this.kqThangStatus.Text = "quẻ Dương";
+                else this.kqThangStatus.Text = "quẻ Âm";
+            }
+            else
+            {
+                this.kqThangStatus.Text = "--";
+            }
         }
         private void updateKetQuaNgay(HoaGiapDonGian dongian)
         {
@@ -207,6 +226,16 @@ namespace Xem_Ngay
             this.kqNgayQue.Text = dongian.tenQue;
             this.kqNgayVanKhi.Text = dongian.quaiVan + "";
             this.kqNgayVanKhi.ForeColor = this.mauSacTheoHKDQ(dongian.quaiVan);
+            Que que = AllQueDich.MAPPING_TEN_QUE_VS_QUE.get(dongian.tenQue);
+            if (que.isPhuMauQue())
+            {
+                if (que.layAmDuongQue() == true) this.kqNgayStatus.Text = "quẻ Dương";
+                else this.kqNgayStatus.Text = "quẻ Âm";
+            }
+            else
+            {
+                this.kqNgayStatus.Text = "--";
+            }
         }
         private void updateKetQuaGio(HoaGiapDonGian dongian)
         {
@@ -216,6 +245,16 @@ namespace Xem_Ngay
             this.kqGioQue.Text = dongian.tenQue;
             this.kqGioVanKhi.Text = dongian.quaiVan + "";
             this.kqGioVanKhi.ForeColor = this.mauSacTheoHKDQ(dongian.quaiVan);
+            Que que = AllQueDich.MAPPING_TEN_QUE_VS_QUE.get(dongian.tenQue);
+            if (que.isPhuMauQue())
+            {
+                if (que.layAmDuongQue() == true) this.kqGioStatus.Text = "quẻ Dương";
+                else this.kqGioStatus.Text = "quẻ Âm";
+            }
+            else
+            {
+                this.kqGioStatus.Text = "--";
+            }
         }
         private void updateKetQuaToa(HoaGiapDonGian dongian)
         {
@@ -225,6 +264,16 @@ namespace Xem_Ngay
             this.kqToaQue.Text = dongian.tenQue;
             this.kqToaVanKhi.Text = dongian.quaiVan + "";
             this.kqToaVanKhi.ForeColor = this.mauSacTheoHKDQ(dongian.quaiVan);
+            Que que = AllQueDich.MAPPING_TEN_QUE_VS_QUE.get(dongian.tenQue);
+            if (que.isPhuMauQue())
+            {
+                if (que.layAmDuongQue() == true) this.kqToaStatus.Text = "quẻ Dương";
+                else this.kqToaStatus.Text = "quẻ Âm";
+            }
+            else
+            {
+                this.kqToaStatus.Text = "--";
+            }
         }
         private void updateKetQuaGC1(HoaGiapDonGian dongian)
         {
@@ -234,6 +283,16 @@ namespace Xem_Ngay
             this.kqGC1Que.Text = dongian.tenQue;
             this.kqGC1VanKhi.Text = dongian.quaiVan + "";
             this.kqGC1VanKhi.ForeColor = this.mauSacTheoHKDQ(dongian.quaiVan);
+            Que que = AllQueDich.MAPPING_TEN_QUE_VS_QUE.get(dongian.tenQue);
+            if (que.isPhuMauQue())
+            {
+                if (que.layAmDuongQue() == true) this.kqGC1Status.Text = "quẻ Dương";
+                else this.kqGC1Status.Text = "quẻ Âm";
+            }
+            else
+            {
+                this.kqGC1Status.Text = "--";
+            }
         }
         private void updateKetQuaGC2(HoaGiapDonGian dongian)
         {
@@ -243,6 +302,16 @@ namespace Xem_Ngay
             this.kqGC2Que.Text = dongian.tenQue;
             this.kqGC2VanKhi.Text = dongian.quaiVan + "";
             this.kqGC2VanKhi.ForeColor = this.mauSacTheoHKDQ(dongian.quaiVan);
+            Que que = AllQueDich.MAPPING_TEN_QUE_VS_QUE.get(dongian.tenQue);
+            if (que.isPhuMauQue())
+            {
+                if (que.layAmDuongQue() == true) this.kqGC2Status.Text = "quẻ Dương";
+                else this.kqGC2Status.Text = "quẻ Âm";
+            }
+            else
+            {
+                this.kqGC2Status.Text = "--";
+            }
         }
         
         private void groupBox3_Enter(object sender, EventArgs e)

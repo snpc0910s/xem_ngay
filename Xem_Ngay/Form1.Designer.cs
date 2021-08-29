@@ -247,9 +247,9 @@ namespace Xem_Ngay
             this.kqGC2Status.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.kqGC2Status.Location = new System.Drawing.Point(3, 147);
             this.kqGC2Status.Name = "kqGC2Status";
-            this.kqGC2Status.Size = new System.Drawing.Size(35, 13);
+            this.kqGC2Status.Size = new System.Drawing.Size(13, 13);
             this.kqGC2Status.TabIndex = 8;
-            this.kqGC2Status.Text = "label7";
+            this.kqGC2Status.Text = "--";
             // 
             // kqGC2VanKhi
             // 
@@ -327,9 +327,9 @@ namespace Xem_Ngay
             this.kqGC1Status.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.kqGC1Status.Location = new System.Drawing.Point(3, 147);
             this.kqGC1Status.Name = "kqGC1Status";
-            this.kqGC1Status.Size = new System.Drawing.Size(35, 13);
+            this.kqGC1Status.Size = new System.Drawing.Size(13, 13);
             this.kqGC1Status.TabIndex = 8;
-            this.kqGC1Status.Text = "label6";
+            this.kqGC1Status.Text = "--";
             // 
             // kqGC1VanKhi
             // 
@@ -407,9 +407,9 @@ namespace Xem_Ngay
             this.kqToaStatus.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.kqToaStatus.Location = new System.Drawing.Point(3, 147);
             this.kqToaStatus.Name = "kqToaStatus";
-            this.kqToaStatus.Size = new System.Drawing.Size(35, 13);
+            this.kqToaStatus.Size = new System.Drawing.Size(13, 13);
             this.kqToaStatus.TabIndex = 8;
-            this.kqToaStatus.Text = "label5";
+            this.kqToaStatus.Text = "--";
             // 
             // kqToaVanKhi
             // 
@@ -487,9 +487,9 @@ namespace Xem_Ngay
             this.kqGioStatus.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.kqGioStatus.Location = new System.Drawing.Point(3, 147);
             this.kqGioStatus.Name = "kqGioStatus";
-            this.kqGioStatus.Size = new System.Drawing.Size(35, 13);
+            this.kqGioStatus.Size = new System.Drawing.Size(13, 13);
             this.kqGioStatus.TabIndex = 8;
-            this.kqGioStatus.Text = "label4";
+            this.kqGioStatus.Text = "--";
             // 
             // kqGioVanKhi
             // 
@@ -567,9 +567,9 @@ namespace Xem_Ngay
             this.kqNgayStatus.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.kqNgayStatus.Location = new System.Drawing.Point(3, 147);
             this.kqNgayStatus.Name = "kqNgayStatus";
-            this.kqNgayStatus.Size = new System.Drawing.Size(35, 13);
+            this.kqNgayStatus.Size = new System.Drawing.Size(13, 13);
             this.kqNgayStatus.TabIndex = 8;
-            this.kqNgayStatus.Text = "label3";
+            this.kqNgayStatus.Text = "--";
             // 
             // kqNgayVanKhi
             // 
@@ -647,9 +647,9 @@ namespace Xem_Ngay
             this.kqThangStatus.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.kqThangStatus.Location = new System.Drawing.Point(3, 147);
             this.kqThangStatus.Name = "kqThangStatus";
-            this.kqThangStatus.Size = new System.Drawing.Size(35, 13);
+            this.kqThangStatus.Size = new System.Drawing.Size(13, 13);
             this.kqThangStatus.TabIndex = 8;
-            this.kqThangStatus.Text = "label2";
+            this.kqThangStatus.Text = "--";
             // 
             // kqThangVanKhi
             // 
@@ -728,9 +728,9 @@ namespace Xem_Ngay
             this.kqNamStatus.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.kqNamStatus.Location = new System.Drawing.Point(3, 147);
             this.kqNamStatus.Name = "kqNamStatus";
-            this.kqNamStatus.Size = new System.Drawing.Size(35, 13);
+            this.kqNamStatus.Size = new System.Drawing.Size(13, 13);
             this.kqNamStatus.TabIndex = 4;
-            this.kqNamStatus.Text = "label1";
+            this.kqNamStatus.Text = "--";
             // 
             // kqNamVanKhi
             // 

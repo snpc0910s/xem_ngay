@@ -14,6 +14,8 @@ namespace Xem_Ngay.model._64que
         public int quaiKhi; // HKDQ : ngu hanh quai khi 
         public int quaiVan; // HKDQ
 
+        private bool laPhuMauQue = false; // có phải phụ mẫu quẻ giao duyên không
+        private bool amDuongQue = false; // true là dương false là âm;
         public Que() : base()
         {
 
@@ -31,6 +33,20 @@ namespace Xem_Ngay.model._64que
         {
             this.quaiVan = quaiVan;
             return this;
+        }
+        public Que setPhuMau(bool laPhuMau, bool amDuongPhuMau)
+        {
+            this.laPhuMauQue = laPhuMau;
+            if(this.laPhuMauQue == true) this.amDuongQue = amDuongPhuMau;
+            return this;
+        }
+        public bool isPhuMauQue()
+        {
+            return this.laPhuMauQue;
+        }
+        public bool layAmDuongQue()
+        {
+            return this.amDuongQue;
         }
 
         public String toLog()
