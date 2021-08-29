@@ -10,8 +10,17 @@ namespace Xem_Ngay.ultility.excel_data_source
         public string nam;
         public string namChu;
         public string thang;
-        public string ngayBatdau;
-        public string ngayKetthuc;
+        public string ngayBatDau;
+        public string ngayKetThuc;
+
+        public ThongTinThang(String nam, String namChu, String thang, String ngayBatDau, String ngayKetThuc)
+        {
+            this.nam = nam;
+            this.namChu = namChu;
+            this.thang = thang;
+            this.ngayBatDau = ngayBatDau;
+            this.ngayKetThuc = ngayKetThuc;
+        }
 
     }
 }

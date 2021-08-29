@@ -18,7 +18,7 @@ namespace Xem_Ngay.ultility
         public void add(K key1, K key2)
         {
             // neu ton tai thi khong lam gi
-            if (this.isContain(key1) == false) return;
+            if (this.isContain(key1) == true) return;
             this.map1.add(key1, key2);
             this.map2.add(key2, key1);
         }
@@ -35,8 +35,8 @@ namespace Xem_Ngay.ultility
         }
         public bool isContain(K key)
         {
-            if (this.map1.ContainsKey(key)) return true;
-            if (this.map2.ContainsKey(key)) return true;
+            if (this.map1.ContainsKey(key) == true) return true;
+            if (this.map2.ContainsKey(key) == true) return true;
             return false;
         }
     }

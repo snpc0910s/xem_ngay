@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using Xem_Ngay.model._64que;
 using Xem_Ngay.model.luc_thap_hoa_giap;
-
+using Xem_Ngay.ultility.excel_data_source;
 namespace Xem_Ngay
 {
     public partial class Form1 : Form
@@ -28,6 +28,7 @@ namespace Xem_Ngay
             // init ****************************************
             this.initBoldKQQuaiKhiHKDQ();
             this.initWidthGrid();
+            this.intitDataSourceExcel();
             // end init ************************************
 
             // test
@@ -37,6 +38,10 @@ namespace Xem_Ngay
             //List<HoaGiap> hoaGiapAfterFilter = LucThapHoaGiap.locListHoaGiapByLogic(hoaGiaps,filter);
             //List<HoaGiapDonGian> hoagiapdongian = LucThapHoaGiap.listHoaGiapToHoaGiapDonGian(hoaGiapAfterFilter);
             //this.updateListHoaGiapDonGianToDataGrid(this.gridNgay, hoagiapdongian);
+
+            //bool check1 = LucThapHoaGiap.checkViTriHoaGiapThoaMan1Khoang("Mậu Thìn","Ất Sửu","Canh Ngọ"); // true
+            //bool check2 = LucThapHoaGiap.checkViTriHoaGiapThoaMan1Khoang("Quý Hợi", "Nhâm Tuất", "Bính Dần");
+            //bool check3 = LucThapHoaGiap.checkViTriHoaGiapThoaMan1Khoang("", "", "");
         }
         // init some thing
         public void initBoldKQQuaiKhiHKDQ() {
@@ -73,6 +78,11 @@ namespace Xem_Ngay
             this.setGirdViewTimeShow(this.gridGC1);
             this.setGirdViewTimeShow(this.gridGC2);
         }
+        
+        private void intitDataSourceExcel()
+        {
+            //List<ThongTinThang> thongtins = DocGioiHanThangTrongNamExcel.layThongTinThangTuResource();
+        }
         // tìm kiếm
         private void btnTimNam_Click(object sender, EventArgs e)
         {
@@ -97,7 +107,7 @@ namespace Xem_Ngay
         {
             String input = this.txtNgay.Text.ToLower().Trim();
             if (input.Equals("")) return;
-            List<HoaGiap> hoaGiaps = LucThapHoaGiap.timHoaGiapByTen(input);
+            List<HoaGiap> hoaGiaps = LucThapHoaGiap.locListHoaGiapByLogic(saverNgay, input); // loc
             List<HoaGiapDonGian> hoagiapdongian = LucThapHoaGiap.listHoaGiapToHoaGiapDonGian(hoaGiaps);
             this.updateListHoaGiapDonGianToDataGrid(this.gridNgay, hoagiapdongian);
             // reset trụ giờ
@@ -263,6 +273,14 @@ namespace Xem_Ngay
             HoaGiapDonGian newHoaGiap = this.layHoaGiapDonGianRowIndex(this.gridThang, rowIndex);
             if (newHoaGiap == null) return; // error when click empty line
             updateKetQuaThang(newHoaGiap);
+            // update ngày theo tháng theo năm
+            String layNamChonHienTai = this.kqNamHoaGiap.Text;
+            String layThangChonHienTai = newHoaGiap.tenHoaGiap;
+            List<HoaGiap> hoaGiaps = LucThapHoaGiap.layNgayTrongThangTrongNam(layNamChonHienTai,layThangChonHienTai);
+            // lưu lại các ngày
+            saverNgay = hoaGiaps;
+            List<HoaGiapDonGian> hoagiapdongian = LucThapHoaGiap.listHoaGiapToHoaGiapDonGian(hoaGiaps);
+            this.updateListHoaGiapDonGianToDataGrid(this.gridNgay, hoagiapdongian);
         }
         private void gridNgay_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {

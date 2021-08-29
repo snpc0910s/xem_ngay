@@ -30,7 +30,7 @@ namespace Xem_Ngay.ultility
                 return result;
             }else
             {
-                throw new MissingMemberException();
+                return default(V);
             }
         }
         // suggest only raw type

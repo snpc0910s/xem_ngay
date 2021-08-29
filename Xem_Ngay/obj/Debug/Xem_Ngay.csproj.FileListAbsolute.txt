@@ -7,3 +7,11 @@ C:\Users\Tam Minh\source\repos\Xem_Ngay\Xem_Ngay\bin\Debug\Xem_Ngay.exe
 C:\Users\Tam Minh\source\repos\Xem_Ngay\Xem_Ngay\bin\Debug\Xem_Ngay.pdb
 C:\Users\Tam Minh\source\repos\Xem_Ngay\Xem_Ngay\obj\Debug\Xem_Ngay.exe
 C:\Users\Tam Minh\source\repos\Xem_Ngay\Xem_Ngay\obj\Debug\Xem_Ngay.pdb
+C:\Users\Tam Minh\source\repos\Xem_Ngay\Xem_Ngay\bin\Debug\ExcelDataReader.dll
+C:\Users\Tam Minh\source\repos\Xem_Ngay\Xem_Ngay\bin\Debug\ICSharpCode.SharpZipLib.dll
+C:\Users\Tam Minh\source\repos\Xem_Ngay\Xem_Ngay\bin\Debug\ExcelDataReader.pdb
+C:\Users\Tam Minh\source\repos\Xem_Ngay\Xem_Ngay\bin\Debug\ExcelDataReader.xml
+C:\Users\Tam Minh\source\repos\Xem_Ngay\Xem_Ngay\obj\Debug\Xem_Ngay.csproj.CopyComplete
+C:\Users\Tam Minh\source\repos\Xem_Ngay\Xem_Ngay\bin\Debug\ExcelDataReader.DataSet.dll
+C:\Users\Tam Minh\source\repos\Xem_Ngay\Xem_Ngay\bin\Debug\ExcelDataReader.DataSet.pdb
+C:\Users\Tam Minh\source\repos\Xem_Ngay\Xem_Ngay\bin\Debug\ExcelDataReader.DataSet.xml

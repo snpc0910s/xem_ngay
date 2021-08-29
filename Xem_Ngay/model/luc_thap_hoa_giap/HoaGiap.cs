@@ -89,7 +89,6 @@ namespace Xem_Ngay.model.luc_thap_hoa_giap
         public bool thoaManDieuKien(Map<String,List<String>> logic)
         {
             // ƯU TIÊN BỎ TRƯỚC RỒI SẼ CHỌN SAU
-
             bool boKey = false;
             // bỏ thiên can
             if (logic.ContainsKey("bt"))

@@ -6,6 +6,7 @@ using Xem_Ngay.model.thien_can;
 using Xem_Ngay.model.dia_chi;
 using Xem_Ngay.model._64que;
 using Xem_Ngay.ultility;
+using Xem_Ngay.ultility.excel_data_source;
 
 namespace Xem_Ngay.model.luc_thap_hoa_giap
 {
@@ -127,6 +128,7 @@ namespace Xem_Ngay.model.luc_thap_hoa_giap
 
         public static Map<string, int> MAP_HOA_GIAP_VI_TRI = new Map<string, int>();
 
+        public static Map<string, List<ThongTinThang>> CACHE_THONG_TIN_THANG_NAM = new Map<string, List<ThongTinThang>>(); 
         // load data when init value
         static LucThapHoaGiap()
         {
@@ -135,6 +137,57 @@ namespace Xem_Ngay.model.luc_thap_hoa_giap
                 MAP_HOA_GIAP_VI_TRI.add(ALL60HOAGIAP[i].ten, i);
             }
             Console.WriteLine("");
+        }
+        public static List<HoaGiap> layNgayTrongThangTrongNam(String tenNam, String tenThang)
+        {
+            List<HoaGiap> result = new List<HoaGiap>();
+            String tenNamTemp = tenNam.Trim().ToUpper();
+            String tenThangTemp = tenThang.Trim().ToUpper();
+            List<ThongTinThang> thongtinThangTrongNam;
+            // lazy loading .....
+            if (CACHE_THONG_TIN_THANG_NAM.ContainsKey(tenNamTemp) == false)
+            {
+                // không tồn tại trong dữ liệu
+                thongtinThangTrongNam = DocGioiHanThangTrongNamExcel.layThongTinThangTuResourceBangTenNam(tenNamTemp);
+                // save to cache =))
+                CACHE_THONG_TIN_THANG_NAM.add(tenNamTemp, thongtinThangTrongNam);
+            }
+            else
+            {
+                // tồn tại trong resource
+                thongtinThangTrongNam = CACHE_THONG_TIN_THANG_NAM.get(tenNamTemp);
+            }
+            // lấy tát cả các ngày hoa giáp thoả mãn
+            foreach (ThongTinThang info in thongtinThangTrongNam)
+            {
+                // info.thang.Trim() thang la so vd 1: 
+                String thangCanTim = BIMAP_THANG_DIA_CHI.get(info.thang).Trim().ToUpper(); // DẦN
+                if (tenThangTemp.ToUpper().IndexOf(thangCanTim) > -1)
+                {
+                    // find and push to list hoa giap
+                    result = layCacHoaGiapTheo1Khoang(info.ngayBatDau, info.ngayKetThuc);
+                    break;
+                }
+            }
+            return result;
+        }
+        // kiểm tra hoa giáp nằm trong 1 khoảng
+        public static bool checkViTriHoaGiapThoaMan1Khoang(String hoaGiap, String hoaGiapBatDau, String HoaGiapKetThuc)
+        {
+            int iHoa = MAP_HOA_GIAP_VI_TRI.get(hoaGiap);
+            int iHoaB = MAP_HOA_GIAP_VI_TRI.get(hoaGiapBatDau);
+            int iHoaK = MAP_HOA_GIAP_VI_TRI.get(HoaGiapKetThuc);
+            if (iHoa == -1 || iHoaB == -1 || iHoaK == -1) return false;
+            if(iHoaB <= iHoaK)
+            {
+                if (iHoaB <= iHoa && iHoa <= iHoaK) return true;
+            }else
+            {
+                if (iHoaB <= iHoa && iHoa < 60) return true;
+                if (0 <= iHoa && iHoa < iHoaK) return true;
+            }
+
+            return false;
         }
 
         public static HoaGiap timHoaGiapTuViTri(int position)
@@ -219,9 +272,9 @@ namespace Xem_Ngay.model.luc_thap_hoa_giap
 
             int pointStart = -1;
             int pointEnd = -1;
-            for(int i = 0; i < 60; i++ )
+            for (int i = 0; i < 60; i++)
             {
-                String tenHoaGiap = ALL60HOAGIAP[i].ten.ToUpper() ;
+                String tenHoaGiap = ALL60HOAGIAP[i].ten.ToUpper();
                 if (tenHoaGiap.Equals(hoaGiapBatDau)) pointStart = i;
                 if (tenHoaGiap.Equals(hoaGiapKetThuc)) pointEnd = i;
             }
