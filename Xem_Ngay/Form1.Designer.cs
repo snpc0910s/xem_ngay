@@ -33,42 +33,49 @@ namespace Xem_Ngay
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox13 = new System.Windows.Forms.GroupBox();
             this.groupBox12 = new System.Windows.Forms.GroupBox();
+            this.resetGC2 = new System.Windows.Forms.Label();
             this.kqGC2Status = new System.Windows.Forms.Label();
             this.kqGC2VanKhi = new System.Windows.Forms.Label();
             this.kqGC2Que = new System.Windows.Forms.Label();
             this.kqGC2QuaiKhi = new System.Windows.Forms.Label();
             this.kqGC2HoaGiap = new System.Windows.Forms.Label();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
+            this.resetGC1 = new System.Windows.Forms.Label();
             this.kqGC1Status = new System.Windows.Forms.Label();
             this.kqGC1VanKhi = new System.Windows.Forms.Label();
             this.kqGC1Que = new System.Windows.Forms.Label();
             this.kqGC1QuaiKhi = new System.Windows.Forms.Label();
             this.kqGC1HoaGiap = new System.Windows.Forms.Label();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.resetToa = new System.Windows.Forms.Label();
             this.kqToaStatus = new System.Windows.Forms.Label();
             this.kqToaVanKhi = new System.Windows.Forms.Label();
             this.kqToaQue = new System.Windows.Forms.Label();
             this.kqToaQuaiKhi = new System.Windows.Forms.Label();
             this.kqToaHoaGiap = new System.Windows.Forms.Label();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.resetGio = new System.Windows.Forms.Label();
             this.kqGioStatus = new System.Windows.Forms.Label();
             this.kqGioVanKhi = new System.Windows.Forms.Label();
             this.kqGioQue = new System.Windows.Forms.Label();
             this.kqGioQuaiKhi = new System.Windows.Forms.Label();
             this.kqGioHoaGiap = new System.Windows.Forms.Label();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.resetNgay = new System.Windows.Forms.Label();
             this.kqNgayStatus = new System.Windows.Forms.Label();
             this.kqNgayVanKhi = new System.Windows.Forms.Label();
             this.kqNgayQue = new System.Windows.Forms.Label();
             this.kqNgayQuaiKhi = new System.Windows.Forms.Label();
             this.kqNgayHoaGiap = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.resetThang = new System.Windows.Forms.Label();
             this.kqThangStatus = new System.Windows.Forms.Label();
             this.kqThangVanKhi = new System.Windows.Forms.Label();
             this.kqThangQue = new System.Windows.Forms.Label();
             this.kqThangQuaiKhi = new System.Windows.Forms.Label();
             this.kqThangHoaGiap = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.resetNam = new System.Windows.Forms.Label();
             this.kqNamStatus = new System.Windows.Forms.Label();
             this.kqNamVanKhi = new System.Windows.Forms.Label();
             this.kqNamQue = new System.Windows.Forms.Label();
@@ -142,13 +149,6 @@ namespace Xem_Ngay
             this.groupNam = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.resetNam = new System.Windows.Forms.Label();
-            this.resetThang = new System.Windows.Forms.Label();
-            this.resetNgay = new System.Windows.Forms.Label();
-            this.resetGio = new System.Windows.Forms.Label();
-            this.resetToa = new System.Windows.Forms.Label();
-            this.resetGC1 = new System.Windows.Forms.Label();
-            this.resetGC2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox12.SuspendLayout();
@@ -230,6 +230,17 @@ namespace Xem_Ngay
             this.groupBox12.TabStop = false;
             this.groupBox12.Text = "Gia chủ 2";
             // 
+            // resetGC2
+            // 
+            this.resetGC2.AutoSize = true;
+            this.resetGC2.ForeColor = System.Drawing.Color.Red;
+            this.resetGC2.Location = new System.Drawing.Point(113, 16);
+            this.resetGC2.Name = "resetGC2";
+            this.resetGC2.Size = new System.Drawing.Size(12, 13);
+            this.resetGC2.TabIndex = 9;
+            this.resetGC2.Text = "x";
+            this.resetGC2.Click += new System.EventHandler(this.resetGC2_Click);
+            // 
             // kqGC2Status
             // 
             this.kqGC2Status.AutoSize = true;
@@ -299,6 +310,17 @@ namespace Xem_Ngay
             this.groupBox11.TabStop = false;
             this.groupBox11.Text = "Gia chủ 1";
             // 
+            // resetGC1
+            // 
+            this.resetGC1.AutoSize = true;
+            this.resetGC1.ForeColor = System.Drawing.Color.Red;
+            this.resetGC1.Location = new System.Drawing.Point(122, 16);
+            this.resetGC1.Name = "resetGC1";
+            this.resetGC1.Size = new System.Drawing.Size(12, 13);
+            this.resetGC1.TabIndex = 9;
+            this.resetGC1.Text = "x";
+            this.resetGC1.Click += new System.EventHandler(this.resetGC1_Click);
+            // 
             // kqGC1Status
             // 
             this.kqGC1Status.AutoSize = true;
@@ -325,7 +347,7 @@ namespace Xem_Ngay
             this.kqGC1Que.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.kqGC1Que.AutoSize = true;
-            this.kqGC1Que.Location = new System.Drawing.Point(32, 85);
+            this.kqGC1Que.Location = new System.Drawing.Point(16, 85);
             this.kqGC1Que.Name = "kqGC1Que";
             this.kqGC1Que.Size = new System.Drawing.Size(13, 13);
             this.kqGC1Que.TabIndex = 6;
@@ -368,6 +390,17 @@ namespace Xem_Ngay
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Toạ";
             // 
+            // resetToa
+            // 
+            this.resetToa.AutoSize = true;
+            this.resetToa.ForeColor = System.Drawing.Color.Red;
+            this.resetToa.Location = new System.Drawing.Point(118, 16);
+            this.resetToa.Name = "resetToa";
+            this.resetToa.Size = new System.Drawing.Size(12, 13);
+            this.resetToa.TabIndex = 9;
+            this.resetToa.Text = "x";
+            this.resetToa.Click += new System.EventHandler(this.resetToa_Click);
+            // 
             // kqToaStatus
             // 
             this.kqToaStatus.AutoSize = true;
@@ -394,7 +427,7 @@ namespace Xem_Ngay
             this.kqToaQue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.kqToaQue.AutoSize = true;
-            this.kqToaQue.Location = new System.Drawing.Point(25, 85);
+            this.kqToaQue.Location = new System.Drawing.Point(19, 85);
             this.kqToaQue.Name = "kqToaQue";
             this.kqToaQue.Size = new System.Drawing.Size(13, 13);
             this.kqToaQue.TabIndex = 6;
@@ -437,6 +470,17 @@ namespace Xem_Ngay
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Giờ";
             // 
+            // resetGio
+            // 
+            this.resetGio.AutoSize = true;
+            this.resetGio.ForeColor = System.Drawing.Color.Red;
+            this.resetGio.Location = new System.Drawing.Point(122, 16);
+            this.resetGio.Name = "resetGio";
+            this.resetGio.Size = new System.Drawing.Size(12, 13);
+            this.resetGio.TabIndex = 9;
+            this.resetGio.Text = "x";
+            this.resetGio.Click += new System.EventHandler(this.resetGio_Click);
+            // 
             // kqGioStatus
             // 
             this.kqGioStatus.AutoSize = true;
@@ -463,7 +507,7 @@ namespace Xem_Ngay
             this.kqGioQue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.kqGioQue.AutoSize = true;
-            this.kqGioQue.Location = new System.Drawing.Point(32, 85);
+            this.kqGioQue.Location = new System.Drawing.Point(22, 85);
             this.kqGioQue.Name = "kqGioQue";
             this.kqGioQue.Size = new System.Drawing.Size(13, 13);
             this.kqGioQue.TabIndex = 6;
@@ -506,6 +550,17 @@ namespace Xem_Ngay
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Ngày";
             // 
+            // resetNgay
+            // 
+            this.resetNgay.AutoSize = true;
+            this.resetNgay.ForeColor = System.Drawing.Color.Red;
+            this.resetNgay.Location = new System.Drawing.Point(122, 16);
+            this.resetNgay.Name = "resetNgay";
+            this.resetNgay.Size = new System.Drawing.Size(12, 13);
+            this.resetNgay.TabIndex = 9;
+            this.resetNgay.Text = "x";
+            this.resetNgay.Click += new System.EventHandler(this.resetNgay_Click);
+            // 
             // kqNgayStatus
             // 
             this.kqNgayStatus.AutoSize = true;
@@ -532,7 +587,7 @@ namespace Xem_Ngay
             this.kqNgayQue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.kqNgayQue.AutoSize = true;
-            this.kqNgayQue.Location = new System.Drawing.Point(32, 85);
+            this.kqNgayQue.Location = new System.Drawing.Point(25, 85);
             this.kqNgayQue.Name = "kqNgayQue";
             this.kqNgayQue.Size = new System.Drawing.Size(13, 13);
             this.kqNgayQue.TabIndex = 6;
@@ -575,6 +630,17 @@ namespace Xem_Ngay
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Tháng";
             // 
+            // resetThang
+            // 
+            this.resetThang.AutoSize = true;
+            this.resetThang.ForeColor = System.Drawing.Color.Red;
+            this.resetThang.Location = new System.Drawing.Point(122, 16);
+            this.resetThang.Name = "resetThang";
+            this.resetThang.Size = new System.Drawing.Size(12, 13);
+            this.resetThang.TabIndex = 9;
+            this.resetThang.Text = "x";
+            this.resetThang.Click += new System.EventHandler(this.resetThang_Click);
+            // 
             // kqThangStatus
             // 
             this.kqThangStatus.AutoSize = true;
@@ -601,7 +667,7 @@ namespace Xem_Ngay
             this.kqThangQue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.kqThangQue.AutoSize = true;
-            this.kqThangQue.Location = new System.Drawing.Point(32, 85);
+            this.kqThangQue.Location = new System.Drawing.Point(25, 85);
             this.kqThangQue.Name = "kqThangQue";
             this.kqThangQue.Size = new System.Drawing.Size(13, 13);
             this.kqThangQue.TabIndex = 6;
@@ -645,6 +711,17 @@ namespace Xem_Ngay
             this.groupBox3.Text = "Năm";
             this.groupBox3.Enter += new System.EventHandler(this.groupBox3_Enter);
             // 
+            // resetNam
+            // 
+            this.resetNam.AutoSize = true;
+            this.resetNam.ForeColor = System.Drawing.Color.Red;
+            this.resetNam.Location = new System.Drawing.Point(122, 16);
+            this.resetNam.Name = "resetNam";
+            this.resetNam.Size = new System.Drawing.Size(12, 13);
+            this.resetNam.TabIndex = 5;
+            this.resetNam.Text = "x";
+            this.resetNam.Click += new System.EventHandler(this.resetNam_Click);
+            // 
             // kqNamStatus
             // 
             this.kqNamStatus.AutoSize = true;
@@ -671,7 +748,7 @@ namespace Xem_Ngay
             this.kqNamQue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.kqNamQue.AutoSize = true;
-            this.kqNamQue.Location = new System.Drawing.Point(34, 85);
+            this.kqNamQue.Location = new System.Drawing.Point(25, 85);
             this.kqNamQue.Name = "kqNamQue";
             this.kqNamQue.Size = new System.Drawing.Size(13, 13);
             this.kqNamQue.TabIndex = 2;
@@ -1295,83 +1372,6 @@ namespace Xem_Ngay
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(146, 20);
             this.textBox1.TabIndex = 0;
-            // 
-            // resetNam
-            // 
-            this.resetNam.AutoSize = true;
-            this.resetNam.ForeColor = System.Drawing.Color.Red;
-            this.resetNam.Location = new System.Drawing.Point(122, 16);
-            this.resetNam.Name = "resetNam";
-            this.resetNam.Size = new System.Drawing.Size(12, 13);
-            this.resetNam.TabIndex = 5;
-            this.resetNam.Text = "x";
-            this.resetNam.Click += new System.EventHandler(this.resetNam_Click);
-            // 
-            // resetThang
-            // 
-            this.resetThang.AutoSize = true;
-            this.resetThang.ForeColor = System.Drawing.Color.Red;
-            this.resetThang.Location = new System.Drawing.Point(122, 16);
-            this.resetThang.Name = "resetThang";
-            this.resetThang.Size = new System.Drawing.Size(12, 13);
-            this.resetThang.TabIndex = 9;
-            this.resetThang.Text = "x";
-            this.resetThang.Click += new System.EventHandler(this.resetThang_Click);
-            // 
-            // resetNgay
-            // 
-            this.resetNgay.AutoSize = true;
-            this.resetNgay.ForeColor = System.Drawing.Color.Red;
-            this.resetNgay.Location = new System.Drawing.Point(122, 16);
-            this.resetNgay.Name = "resetNgay";
-            this.resetNgay.Size = new System.Drawing.Size(12, 13);
-            this.resetNgay.TabIndex = 9;
-            this.resetNgay.Text = "x";
-            this.resetNgay.Click += new System.EventHandler(this.resetNgay_Click);
-            // 
-            // resetGio
-            // 
-            this.resetGio.AutoSize = true;
-            this.resetGio.ForeColor = System.Drawing.Color.Red;
-            this.resetGio.Location = new System.Drawing.Point(122, 16);
-            this.resetGio.Name = "resetGio";
-            this.resetGio.Size = new System.Drawing.Size(12, 13);
-            this.resetGio.TabIndex = 9;
-            this.resetGio.Text = "x";
-            this.resetGio.Click += new System.EventHandler(this.resetGio_Click);
-            // 
-            // resetToa
-            // 
-            this.resetToa.AutoSize = true;
-            this.resetToa.ForeColor = System.Drawing.Color.Red;
-            this.resetToa.Location = new System.Drawing.Point(118, 16);
-            this.resetToa.Name = "resetToa";
-            this.resetToa.Size = new System.Drawing.Size(12, 13);
-            this.resetToa.TabIndex = 9;
-            this.resetToa.Text = "x";
-            this.resetToa.Click += new System.EventHandler(this.resetToa_Click);
-            // 
-            // resetGC1
-            // 
-            this.resetGC1.AutoSize = true;
-            this.resetGC1.ForeColor = System.Drawing.Color.Red;
-            this.resetGC1.Location = new System.Drawing.Point(122, 16);
-            this.resetGC1.Name = "resetGC1";
-            this.resetGC1.Size = new System.Drawing.Size(12, 13);
-            this.resetGC1.TabIndex = 9;
-            this.resetGC1.Text = "x";
-            this.resetGC1.Click += new System.EventHandler(this.resetGC1_Click);
-            // 
-            // resetGC2
-            // 
-            this.resetGC2.AutoSize = true;
-            this.resetGC2.ForeColor = System.Drawing.Color.Red;
-            this.resetGC2.Location = new System.Drawing.Point(113, 16);
-            this.resetGC2.Name = "resetGC2";
-            this.resetGC2.Size = new System.Drawing.Size(12, 13);
-            this.resetGC2.TabIndex = 9;
-            this.resetGC2.Text = "x";
-            this.resetGC2.Click += new System.EventHandler(this.resetGC2_Click);
             // 
             // Form1
             // 

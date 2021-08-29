@@ -84,16 +84,28 @@ namespace Xem_Ngay.model.luc_thap_hoa_giap
         public static readonly HoaGiap TAN_HOI = new HoaGiap(ThienCanInstance.TAN, DiaChiInstance.HOI).themQue(AllQueDich.THUY_DIA_TY);
         public static readonly HoaGiap QUY_HOI = new HoaGiap(ThienCanInstance.QUY, DiaChiInstance.HOI).themQue(AllQueDich.SON_DIA_BAC);
 
-        public static readonly List<HoaGiap> ALL60HOAGIAP = new List<HoaGiap>() { QUY_TI, TAN_TI, KY_TI, DINH_TI, AT_TI, NHAM_THIN, CANH_THIN, MAU_THIN, BINH_THIN, GIAP_THIN, QUY_MAO, TAN_MAO, KY_MAO, DINH_MAO, AT_MAO, NHAM_DAN, CANH_DAN, MAU_DAN, BINH_DAN, GIAP_DAN, QUY_SUU, TAN_SUU, KY_SUU, DINH_SUU, AT_SUU, NHAM_TY, CANH_TY, MAU_TY, BINH_TY, GIAP_TY, GIAP_NGO, BINH_NGO, MAU_NGO, CANH_NGO, NHAM_NGO, AT_MUI, DINH_MUI, KY_MUI, TAN_MUI, QUY_MUI, GIAP_THAN, BINH_THAN, MAU_THAN, CANH_THAN, NHAM_THAN, AT_DAU, DINH_DAU, KY_DAU, TAN_DAU, QUY_DAU, GIAP_TUAT, BINH_TUAT, MAU_TUAT, CANH_TUAT, NHAM_TUAT, AT_HOI, DINH_HOI, KY_HOI, TAN_HOI, QUY_HOI };
+        // các vòng phải theo thứ tự để duyệt không được đảo trật tự DUYỆT TỪ GIAP TY -> GIAP TUAT ->  GIAP THAN -> GIAP NGO -> GIAP THIN -> GIAP DAN
 
+        public static readonly List<HoaGiap> VONG_GIAP_TY = new List<HoaGiap>() { GIAP_TY, AT_SUU, BINH_DAN, DINH_MAO, MAU_THIN, KY_TI, CANH_NGO, TAN_MUI, NHAM_THAN, QUY_DAU };
 
+        public static readonly List<HoaGiap> VONG_GIAP_TUAT = new List<HoaGiap>() { GIAP_TUAT, AT_HOI, BINH_TY, DINH_SUU, MAU_DAN, KY_MAO, CANH_THIN, TAN_TI, NHAM_NGO, QUY_MUI };
+
+        public static readonly List<HoaGiap> VONG_GIAP_THAN = new List<HoaGiap>() { GIAP_THAN, AT_DAU, BINH_TUAT, DINH_HOI, MAU_TY, KY_SUU, CANH_DAN, TAN_MAO, NHAM_THIN, QUY_TI };
+
+        public static readonly List<HoaGiap> VONG_GIAP_NGO = new List<HoaGiap>() { GIAP_NGO, AT_MUI, BINH_THAN, DINH_DAU, MAU_TUAT, KY_HOI, CANH_TY, TAN_SUU, NHAM_DAN, QUY_MAO };
+
+        public static readonly List<HoaGiap> VONG_GIAP_THIN = new List<HoaGiap>() { GIAP_THIN, AT_TI, BINH_NGO, DINH_MUI, MAU_THAN, KY_DAU, CANH_TUAT, TAN_HOI, NHAM_TY, QUY_SUU };
+
+        public static readonly List<HoaGiap> VONG_GIAP_DAN = new List<HoaGiap>() { GIAP_DAN, AT_MAO, BINH_THIN, DINH_TI, MAU_NGO, KY_MUI, CANH_THAN, TAN_DAU, NHAM_TUAT, QUY_HOI };
+        
+        // mapping số thứ tự với thiên can
         public static readonly Map<int, String> MAP_STT_STRING_THIEN_CAN = new Map<int, String>()
                                                                         .withValue(1, "Giáp").withValue(2, "Ất")
                                                                         .withValue(3, "Bính").withValue(4, "Đinh")
                                                                         .withValue(5, "Mậu").withValue(6, "Kỷ")
                                                                         .withValue(7, "Canh").withValue(8, "Tân")
                                                                         .withValue(9, "Nhâm").withValue(10, "Quý");
-
+        // mapping số thứ tự với địa chi
         public static readonly Map<int, String> MAP_STT_STRING_DIACHI = new Map<int, String>()
                                                                                 .withValue(1, "Tý").withValue(2, "Sửu")
                                                                                 .withValue(3, "Dần").withValue(4, "Mão")
@@ -102,6 +114,41 @@ namespace Xem_Ngay.model.luc_thap_hoa_giap
                                                                                 .withValue(9, "Thân").withValue(10, "Dậu")
                                                                                 .withValue(11, "Tuất").withValue(12, "Hợi");
 
+        public static readonly BiMap1Type<String> BIMAP_THANG_DIA_CHI = new BiMap1Type<string>()
+                                                                            .with("1","Dần").with("2", "Mão")
+                                                                            .with("3", "Thìn").with("4", "Tị")
+                                                                            .with("5", "Ngọ").with("6", "Mùi")
+                                                                            .with("7", "Thân").with("8", "Dậu")
+                                                                            .with("9", "Tuất").with("10", "Hợi")
+                                                                            .with("11", "Tý").with("12","Sửu");
+
+        // tất cả các hoa giáp
+        public static readonly List<HoaGiap> ALL60HOAGIAP = new List<HoaGiap>() { GIAP_TY, AT_SUU, BINH_DAN, DINH_MAO, MAU_THIN, KY_TI, CANH_NGO, TAN_MUI, NHAM_THAN, QUY_DAU, GIAP_TUAT, AT_HOI, BINH_TY, DINH_SUU, MAU_DAN, KY_MAO, CANH_THIN, TAN_TI, NHAM_NGO, QUY_MUI, GIAP_THAN, AT_DAU, BINH_TUAT, DINH_HOI, MAU_TY, KY_SUU, CANH_DAN, TAN_MAO, NHAM_THIN, QUY_TI, GIAP_NGO, AT_MUI, BINH_THAN, DINH_DAU, MAU_TUAT, KY_HOI, CANH_TY, TAN_SUU, NHAM_DAN, QUY_MAO, GIAP_THIN, AT_TI, BINH_NGO, DINH_MUI, MAU_THAN, KY_DAU, CANH_TUAT, TAN_HOI, NHAM_TY, QUY_SUU, GIAP_DAN, AT_MAO, BINH_THIN, DINH_TI, MAU_NGO, KY_MUI, CANH_THAN, TAN_DAU, NHAM_TUAT, QUY_HOI };
+
+        public static Map<string, int> MAP_HOA_GIAP_VI_TRI = new Map<string, int>();
+
+        // load data when init value
+        static LucThapHoaGiap()
+        {
+            for (int i = 0 ; i < 60; i++)
+            {
+                MAP_HOA_GIAP_VI_TRI.add(ALL60HOAGIAP[i].ten, i);
+            }
+            Console.WriteLine("");
+        }
+
+        public static HoaGiap timHoaGiapTuViTri(int position)
+        {
+            if (position < 0 || position > 59) return null;
+            return ALL60HOAGIAP[position];
+        }
+        public static int timViTriHoaGiapBangTen(String ten)
+        {
+            if (MAP_HOA_GIAP_VI_TRI.ContainsKey(ten)) return MAP_HOA_GIAP_VI_TRI.get(ten);
+            return -1; // neu khong tim thay ten tuong ung
+        }
+
+        // tìm tất cả hoa giáp có tên chứa input
         public static List<HoaGiap> timHoaGiapByTen(String ten)
         {
             ten = ten.ToLower();
@@ -112,6 +159,7 @@ namespace Xem_Ngay.model.luc_thap_hoa_giap
             }
             return result;
         }
+        // tìm hoa giáp có tên chính xác VD: Nhâm Dần, Bính Tuất,...
         public static HoaGiap timChinhXacDauTien(String ten)
         {
             ten = ten.ToLower();
@@ -121,6 +169,7 @@ namespace Xem_Ngay.model.luc_thap_hoa_giap
             }
             return null;
         }
+        // Chuyển các Hoa Giáp thành Hoa Giáp đơn giản hơn để hiển thị
         public static List<HoaGiapDonGian> listHoaGiapToHoaGiapDonGian(List<HoaGiap> lstHoaGiap)
         {
             List<HoaGiapDonGian> result = new List<HoaGiapDonGian>();
@@ -133,6 +182,8 @@ namespace Xem_Ngay.model.luc_thap_hoa_giap
             }
             return result;
         }
+        
+        // Tương tự như trên nhưng là chuyển đổi về thành các array value
         public static List<String[]> listHoaGiapToRowTable(List<HoaGiap> lstHoaGiap)
         {
             List<String[]> result = new List<String[]>();
@@ -144,6 +195,56 @@ namespace Xem_Ngay.model.luc_thap_hoa_giap
                     result.Add(dongian.toRowDataTable());
                 }
             }
+            return result;
+        }
+        // TOP 1 tinh nang: lọc list hoa giáp bằng logic ***************
+        public static List<HoaGiap> locListHoaGiapByLogic(List<HoaGiap> lstHoaGiap, String slogic)
+        {
+            Map<String, List<String>> logic = HoaGiap.chuyenStringToMapLogic(slogic);
+            List<HoaGiap> result = new List<HoaGiap>();
+            foreach(HoaGiap hoaGiap in lstHoaGiap)
+            {
+                if (hoaGiap.thoaManDieuKien(logic) == true) result.Add(hoaGiap);
+            }
+            return result;
+        }
+
+        // lấy lần lượt các hoa giáp theo 1 khoảng : VD từ Mậu Thân đến Quý Sửu: MAU_THAN,KY_DAU,CANH_TUAT,TAN_HOI,NHAM_TY,QUY_SUU
+        public static List<HoaGiap> layCacHoaGiapTheo1Khoang(String hoaGiapBatDau , String hoaGiapKetThuc)
+        {
+            hoaGiapBatDau = hoaGiapBatDau.ToUpper().Trim();
+            hoaGiapKetThuc = hoaGiapKetThuc.ToUpper().Trim();
+
+            List<HoaGiap> result = new List<HoaGiap>();
+
+            int pointStart = -1;
+            int pointEnd = -1;
+            for(int i = 0; i < 60; i++ )
+            {
+                String tenHoaGiap = ALL60HOAGIAP[i].ten.ToUpper() ;
+                if (tenHoaGiap.Equals(hoaGiapBatDau)) pointStart = i;
+                if (tenHoaGiap.Equals(hoaGiapKetThuc)) pointEnd = i;
+            }
+            if (pointStart == -1 || pointEnd == -1) return result; // không tìm thấy 1 trong 2 hoa giáp
+            if(pointEnd < pointStart)
+            {
+                for (int i = pointStart; i < 60; i++)
+                {
+                    result.Add(ALL60HOAGIAP[i]);
+                }
+                for (int i = 0; i <= pointEnd; i++)
+                {
+                    result.Add(ALL60HOAGIAP[i]);
+                }
+            }
+            else
+            {
+                for(int i = pointStart; i <= pointEnd; i++)
+                {
+                    result.Add(ALL60HOAGIAP[i]);
+                }
+            }
+
             return result;
         }
     }

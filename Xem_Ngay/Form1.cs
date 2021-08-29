@@ -13,11 +13,16 @@ namespace Xem_Ngay
 {
     public partial class Form1 : Form
     {
+
+        private static List<HoaGiap> saverThang = new List<HoaGiap>();
+        private static List<HoaGiap> saverNgay = new List<HoaGiap>();
+        private static List<HoaGiap> saverGio = new List<HoaGiap>();
+
         public Form1()
         {
             InitializeComponent();
         }
-
+        
         private void Form1_Load(object sender, EventArgs e)
         {
             // init ****************************************
@@ -26,9 +31,12 @@ namespace Xem_Ngay
             // end init ************************************
 
             // test
-            //List<HoaGiap> hoaGiaps = LucThapHoaGiap.TAN_SUU.lay12Thang();
-            //List<HoaGiapDonGian> hoagiapdongian = LucThapHoaGiap.listHoaGiapToHoaGiapDonGian(hoaGiaps);
-            //this.updateListHoaGiapDonGianToDataGrid(this.gridThang, hoagiapdongian);
+            //List<HoaGiap> hoaGiaps = LucThapHoaGiap.layCacHoaGiapTheo1Khoang("bính dần", "canh ngọ");
+            //String filter = "bt:Đinh;bd:Thìn,Dần;bk:2;bv:2";
+            //String filter = "cq:Đại Tráng,Tổn;bv:2,9;bk:8,2";
+            //List<HoaGiap> hoaGiapAfterFilter = LucThapHoaGiap.locListHoaGiapByLogic(hoaGiaps,filter);
+            //List<HoaGiapDonGian> hoagiapdongian = LucThapHoaGiap.listHoaGiapToHoaGiapDonGian(hoaGiapAfterFilter);
+            //this.updateListHoaGiapDonGianToDataGrid(this.gridNgay, hoagiapdongian);
         }
         // init some thing
         public void initBoldKQQuaiKhiHKDQ() {
@@ -81,7 +89,7 @@ namespace Xem_Ngay
         {
             String input = this.txtThang.Text.ToLower().Trim();
             if (input.Equals("")) return;
-            List<HoaGiap> hoaGiaps = LucThapHoaGiap.timHoaGiapByTen(input);
+            List<HoaGiap> hoaGiaps = LucThapHoaGiap.locListHoaGiapByLogic(saverThang, input); // loc
             List<HoaGiapDonGian> hoagiapdongian = LucThapHoaGiap.listHoaGiapToHoaGiapDonGian(hoaGiaps);
             this.updateListHoaGiapDonGianToDataGrid(this.gridThang, hoagiapdongian);
         }
@@ -100,7 +108,7 @@ namespace Xem_Ngay
         {
             String input = this.txtGio.Text.ToLower().Trim();
             if (input.Equals("")) return;
-            List<HoaGiap> hoaGiaps = LucThapHoaGiap.timHoaGiapByTen(input);
+            List<HoaGiap> hoaGiaps = LucThapHoaGiap.locListHoaGiapByLogic(saverGio, input); // loc
             List<HoaGiapDonGian> hoagiapdongian = LucThapHoaGiap.listHoaGiapToHoaGiapDonGian(hoaGiaps);
             this.updateListHoaGiapDonGianToDataGrid(this.gridGio, hoagiapdongian);
            
@@ -238,10 +246,13 @@ namespace Xem_Ngay
         {
             int rowIndex = e.RowIndex;
             HoaGiapDonGian newHoaGiap = this.layHoaGiapDonGianRowIndex(this.gridNam, rowIndex);
+            if (newHoaGiap == null) return; // error when click empty line
             updateKetQuaNam(newHoaGiap);
             // update Tháng theo năm
             HoaGiap hoaGiapFind = LucThapHoaGiap.timChinhXacDauTien(newHoaGiap.tenHoaGiap);
             List<HoaGiap> hoaGiaps = hoaGiapFind.lay12Thang();
+            // lưu lại các tháng khi chọn năm
+            saverThang = hoaGiaps;
             List<HoaGiapDonGian> hoagiapdongian = LucThapHoaGiap.listHoaGiapToHoaGiapDonGian(hoaGiaps);
             this.updateListHoaGiapDonGianToDataGrid(this.gridThang, hoagiapdongian);
         }
@@ -250,16 +261,20 @@ namespace Xem_Ngay
         {
             int rowIndex = e.RowIndex;
             HoaGiapDonGian newHoaGiap = this.layHoaGiapDonGianRowIndex(this.gridThang, rowIndex);
+            if (newHoaGiap == null) return; // error when click empty line
             updateKetQuaThang(newHoaGiap);
         }
         private void gridNgay_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             int rowIndex = e.RowIndex;
             HoaGiapDonGian newHoaGiap = this.layHoaGiapDonGianRowIndex(this.gridNgay, rowIndex);
+            if (newHoaGiap == null) return; // error when click empty line
             updateKetQuaNgay(newHoaGiap);
             // update Giờ theo ngày
             HoaGiap hoaGiapFind = LucThapHoaGiap.timChinhXacDauTien(newHoaGiap.tenHoaGiap);
             List<HoaGiap> hoaGiaps = hoaGiapFind.lay12Gio();
+            // lưu lại các tháng khi chọn năm
+            saverGio = hoaGiaps;
             List<HoaGiapDonGian> hoagiapdongian = LucThapHoaGiap.listHoaGiapToHoaGiapDonGian(hoaGiaps);
             this.updateListHoaGiapDonGianToDataGrid(this.gridGio, hoagiapdongian);
         }
@@ -268,6 +283,7 @@ namespace Xem_Ngay
         {
             int rowIndex = e.RowIndex;
             HoaGiapDonGian newHoaGiap = this.layHoaGiapDonGianRowIndex(this.gridGio, rowIndex);
+            if (newHoaGiap == null) return; // error when click empty line
             updateKetQuaGio(newHoaGiap);
         }
 
@@ -275,6 +291,7 @@ namespace Xem_Ngay
         {
             int rowIndex = e.RowIndex;
             HoaGiapDonGian newHoaGiap = this.layHoaGiapDonGianRowIndex(this.gridToa, rowIndex);
+            if (newHoaGiap == null) return; // error when click empty line
             updateKetQuaToa(newHoaGiap);
         }
 
@@ -282,6 +299,7 @@ namespace Xem_Ngay
         {
             int rowIndex = e.RowIndex;
             HoaGiapDonGian newHoaGiap = this.layHoaGiapDonGianRowIndex(this.gridGC1, rowIndex);
+            if (newHoaGiap == null) return; // error when click empty line
             updateKetQuaGC1(newHoaGiap);
         }
 
@@ -289,9 +307,11 @@ namespace Xem_Ngay
         {
             int rowIndex = e.RowIndex;
             HoaGiapDonGian newHoaGiap = this.layHoaGiapDonGianRowIndex(this.gridGC2, rowIndex);
+            if (newHoaGiap == null) return; // error when click empty line
             updateKetQuaGC2(newHoaGiap);
         }
         private HoaGiapDonGian layHoaGiapDonGianRowIndex(DataGridView gird , int rowIndex) {
+            if (gird.Rows[rowIndex].Cells[0].Value == null) return null;
             int quaiKhi = Int32.Parse(gird.Rows[rowIndex].Cells[0].Value.ToString());
             String tenQue = gird.Rows[rowIndex].Cells[1].Value.ToString();
             int quaiVan = Int32.Parse(gird.Rows[rowIndex].Cells[2].Value.ToString());
