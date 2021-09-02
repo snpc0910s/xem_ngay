@@ -149,6 +149,11 @@ namespace Xem_Ngay
             this.groupNam = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.btnTimThangTuNgay = new System.Windows.Forms.Label();
+            this.logToa = new System.Windows.Forms.RichTextBox();
+            this.logGC1 = new System.Windows.Forms.RichTextBox();
+            this.logGC2 = new System.Windows.Forms.RichTextBox();
+            this.logNam = new System.Windows.Forms.RichTextBox();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox12.SuspendLayout();
@@ -162,18 +167,23 @@ namespace Xem_Ngay
             this.groupBox2.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridNgay)).BeginInit();
+            this.panel3.SuspendLayout();
             this.groupBox8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridGio)).BeginInit();
             this.groupGio.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridToa)).BeginInit();
+            this.panel8.SuspendLayout();
             this.groupBox6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridGC1)).BeginInit();
+            this.panel9.SuspendLayout();
             this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridGC2)).BeginInit();
+            this.panel10.SuspendLayout();
             this.groupNgay.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridThang)).BeginInit();
             this.groupThang.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridNam)).BeginInit();
+            this.panel6.SuspendLayout();
             this.groupNam.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -857,6 +867,7 @@ namespace Xem_Ngay
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.btnTimThangTuNgay);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(3, 59);
             this.panel3.Name = "panel3";
@@ -1011,6 +1022,7 @@ namespace Xem_Ngay
             // 
             // panel8
             // 
+            this.panel8.Controls.Add(this.logToa);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel8.Location = new System.Drawing.Point(3, 59);
             this.panel8.Name = "panel8";
@@ -1088,6 +1100,7 @@ namespace Xem_Ngay
             // 
             // panel9
             // 
+            this.panel9.Controls.Add(this.logGC1);
             this.panel9.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel9.Location = new System.Drawing.Point(3, 59);
             this.panel9.Name = "panel9";
@@ -1165,6 +1178,7 @@ namespace Xem_Ngay
             // 
             // panel10
             // 
+            this.panel10.Controls.Add(this.logGC2);
             this.panel10.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel10.Location = new System.Drawing.Point(3, 59);
             this.panel10.Name = "panel10";
@@ -1319,6 +1333,7 @@ namespace Xem_Ngay
             // 
             // panel6
             // 
+            this.panel6.Controls.Add(this.logNam);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel6.Location = new System.Drawing.Point(3, 59);
             this.panel6.Name = "panel6";
@@ -1373,6 +1388,52 @@ namespace Xem_Ngay
             this.textBox1.Size = new System.Drawing.Size(146, 20);
             this.textBox1.TabIndex = 0;
             // 
+            // btnTimThangTuNgay
+            // 
+            this.btnTimThangTuNgay.AutoSize = true;
+            this.btnTimThangTuNgay.Location = new System.Drawing.Point(3, 3);
+            this.btnTimThangTuNgay.Name = "btnTimThangTuNgay";
+            this.btnTimThangTuNgay.Size = new System.Drawing.Size(54, 13);
+            this.btnTimThangTuNgay.TabIndex = 0;
+            this.btnTimThangTuNgay.Text = "Tìm tháng";
+            this.btnTimThangTuNgay.Click += new System.EventHandler(this.btnTimThangTuNgay_Click);
+            // 
+            // logToa
+            // 
+            this.logToa.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.logToa.Location = new System.Drawing.Point(0, 0);
+            this.logToa.Name = "logToa";
+            this.logToa.Size = new System.Drawing.Size(147, 79);
+            this.logToa.TabIndex = 1;
+            this.logToa.Text = "";
+            // 
+            // logGC1
+            // 
+            this.logGC1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.logGC1.Location = new System.Drawing.Point(0, 0);
+            this.logGC1.Name = "logGC1";
+            this.logGC1.Size = new System.Drawing.Size(143, 79);
+            this.logGC1.TabIndex = 1;
+            this.logGC1.Text = "";
+            // 
+            // logGC2
+            // 
+            this.logGC2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.logGC2.Location = new System.Drawing.Point(0, 0);
+            this.logGC2.Name = "logGC2";
+            this.logGC2.Size = new System.Drawing.Size(143, 79);
+            this.logGC2.TabIndex = 1;
+            this.logGC2.Text = "";
+            // 
+            // logNam
+            // 
+            this.logNam.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.logNam.Location = new System.Drawing.Point(0, 0);
+            this.logNam.Name = "logNam";
+            this.logNam.Size = new System.Drawing.Size(191, 79);
+            this.logNam.TabIndex = 2;
+            this.logNam.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1405,24 +1466,30 @@ namespace Xem_Ngay
             this.groupBox2.PerformLayout();
             this.panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridNgay)).EndInit();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridGio)).EndInit();
             this.groupGio.ResumeLayout(false);
             this.groupGio.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridToa)).EndInit();
+            this.panel8.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridGC1)).EndInit();
+            this.panel9.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridGC2)).EndInit();
+            this.panel10.ResumeLayout(false);
             this.groupNgay.ResumeLayout(false);
             this.groupNgay.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridThang)).EndInit();
             this.groupThang.ResumeLayout(false);
             this.groupThang.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridNam)).EndInit();
+            this.panel6.ResumeLayout(false);
             this.groupNam.ResumeLayout(false);
             this.groupNam.PerformLayout();
             this.ResumeLayout(false);
@@ -1551,6 +1618,11 @@ namespace Xem_Ngay
         private System.Windows.Forms.Label resetGio;
         private System.Windows.Forms.Label resetNgay;
         private System.Windows.Forms.Label resetThang;
+        private System.Windows.Forms.Label btnTimThangTuNgay;
+        private System.Windows.Forms.RichTextBox logToa;
+        private System.Windows.Forms.RichTextBox logGC1;
+        private System.Windows.Forms.RichTextBox logGC2;
+        private System.Windows.Forms.RichTextBox logNam;
     }
 }
 

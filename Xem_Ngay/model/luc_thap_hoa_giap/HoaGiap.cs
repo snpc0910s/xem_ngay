@@ -65,20 +65,38 @@ namespace Xem_Ngay.model.luc_thap_hoa_giap
         public static Map<String,List<String>> chuyenStringToMapLogic(String input)
         {
             Map<String, List<String>> logic = new Map<string, List<string>>();
-            // vd: template  iput :  cx:Quý Hợi;cq:Tấn,Minh Di;bt:Nhâm,Quý;bd:Tý,Sửu;bk:1,2,5;bv:2,7 
+            // vd: template  iput :  bq:Quý Hợi;;bt:Nhâm,Quý;bd:Tý,Sửu;bk:1,2,5;bv:2,7 
             String[] commands = input.Split(';');
             foreach(String command in commands)
             {
                 if (command.Trim().Equals("")) continue;
                 String[] kvs = command.Split(':');
-                String key = kvs[0];
-                String[] vs = kvs[1].Split(',');
-                List<String> lvalue = new List<String>();
-                foreach(String v in vs)
+                if(kvs.Length  == 2) // key và value
                 {
-                    lvalue.Add(v);
+                    String key = kvs[0].Trim().ToLower();
+                    String[] vs = kvs[1].Split(',');
+                    if (key.Equals("")) continue;
+                    if(logic.ContainsKey(key) == false)
+                    {
+                        List<String> lvalue = new List<String>();
+                        foreach (String v in vs)
+                        {
+                            String temp = StringUtil.replaceMoreSpaceAndTrim(v);
+                            if (temp.Equals("")) continue;
+                            lvalue.Add(temp);
+                        }
+                        logic.add(key, lvalue);
+                    }
+                    else
+                    {
+                        foreach (String v in vs)
+                        {
+                            String temp = StringUtil.replaceMoreSpaceAndTrim(v);
+                            logic.get(key).Add(temp);
+                        }
+                    }
+                    
                 }
-                logic.add(key, lvalue);
             }
 
 
@@ -88,7 +106,16 @@ namespace Xem_Ngay.model.luc_thap_hoa_giap
         // top 1 tinh nang xac nhan thoa man
         public bool thoaManDieuKien(Map<String,List<String>> logic)
         {
-            // ƯU TIÊN BỎ TRƯỚC RỒI SẼ CHỌN SAU
+            // ƯU TIÊN BỎ TRƯỚC: 
+            /*
+             * bt: Bỏ thiên can
+             * bd: Bỏ địa chi
+             * bk: bỏ quái khí
+             * bv: bỏ quái vận
+             * bh: bỏ hẳn tên hoa giáp
+             * bq: bỏ quẻ
+             */
+
             bool boKey = false;
             // bỏ thiên can
             if (logic.ContainsKey("bt"))
@@ -183,6 +210,19 @@ namespace Xem_Ngay.model.luc_thap_hoa_giap
                     if (key1 == false && key2 == false)
                     {
                         boKey = true;
+                    }
+                }
+            }
+            if (logic.ContainsKey("bh"))
+            {
+                List<String> multi = logic.get("bh");
+                String tenTemp = this.ten.ToUpper();
+                foreach(String s in multi)
+                {
+                    if (tenTemp.Equals(s.ToUpper()))
+                    {
+                        boKey = true;
+                        break;
                     }
                 }
             }

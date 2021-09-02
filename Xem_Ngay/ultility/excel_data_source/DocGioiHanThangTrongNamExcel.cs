@@ -66,11 +66,11 @@ namespace Xem_Ngay.ultility.excel_data_source
                         {
                             var rowData = dataTable.Rows[i].ItemArray;
                             String nam = rowData[0].ToString();
-                            String namChu = rowData[1].ToString();
+                            String namChu = StringUtil.replaceMoreSpaceAndTrim(rowData[1].ToString());
                             if (tenFind.Equals(namChu.Trim().ToUpper()) == false) continue;
-                            String thang = rowData[2].ToString();
-                            String ngayBatDau = rowData[3].ToString();
-                            String ngayKetThuc = rowData[4].ToString();
+                            String thang = StringUtil.replaceMoreSpaceAndTrim(rowData[2].ToString());
+                            String ngayBatDau = StringUtil.replaceMoreSpaceAndTrim(rowData[3].ToString());
+                            String ngayKetThuc = StringUtil.replaceMoreSpaceAndTrim(rowData[4].ToString());
                             ThongTinThang info = new ThongTinThang(nam, namChu, thang, ngayBatDau, ngayKetThuc);
                             thongtin.Add(info);
                         }

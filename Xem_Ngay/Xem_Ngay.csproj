@@ -89,6 +89,8 @@
     <Compile Include="model\dia_chi\Ti.cs" />
     <Compile Include="model\dia_chi\Tuat.cs" />
     <Compile Include="model\dia_chi\Ty.cs" />
+    <Compile Include="model\hado_lacthu\HaDo.cs" />
+    <Compile Include="model\hado_lacthu\LacThu.cs" />
     <Compile Include="model\luc_thap_hoa_giap\HoaGiap.cs" />
     <Compile Include="model\luc_thap_hoa_giap\HoaGiapDonGian.cs" />
     <Compile Include="model\luc_thap_hoa_giap\LucThapHoaGiap.cs" />
@@ -98,6 +100,11 @@
     <Compile Include="model\ngu_hanh\NguHanh.cs" />
     <Compile Include="model\ngu_hanh\NguHanhInstance.cs" />
     <Compile Include="model\ngu_hanh\UnknownNguHanh.cs" />
+    <Compile Include="model\other\HuyenKhongPhiTinh.cs" />
+    <Compile Include="model\other\QuyNhanDangThienMon.cs" />
+    <Compile Include="model\son_huong\All24SonHuong.cs" />
+    <Compile Include="model\son_huong\All4Phuong.cs" />
+    <Compile Include="model\son_huong\All8Huong.cs" />
     <Compile Include="model\thien_can\All10ThienCan.cs" />
     <Compile Include="model\thien_can\At.cs" />
     <Compile Include="model\thien_can\Binh.cs" />
@@ -121,6 +128,12 @@
     <Compile Include="ultility\excel_data_source\DocGioiHanThangTrongNamExcel.cs" />
     <Compile Include="ultility\excel_data_source\ThongTinThang.cs" />
     <Compile Include="ultility\Map.cs" />
+    <Compile Include="ultility\MapRangeCircle.cs" />
+    <Compile Include="ultility\MapRangeDouble.cs" />
+    <Compile Include="ultility\RegexUtil.cs" />
+    <Compile Include="ultility\StringUtil.cs" />
+    <Compile Include="ultility\Table.cs" />
+    <Compile Include="ultility\TableFixed.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

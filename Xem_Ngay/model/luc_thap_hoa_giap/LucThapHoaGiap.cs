@@ -99,14 +99,14 @@ namespace Xem_Ngay.model.luc_thap_hoa_giap
 
         public static readonly List<HoaGiap> VONG_GIAP_DAN = new List<HoaGiap>() { GIAP_DAN, AT_MAO, BINH_THIN, DINH_TI, MAU_NGO, KY_MUI, CANH_THAN, TAN_DAU, NHAM_TUAT, QUY_HOI };
         
-        // mapping số thứ tự với thiên can
+        // mapping số thứ tự với thiên can dùng để tính toán từ ngày -> 12 giờ tương ứng, từ năm -> 12 tháng tương ứng
         public static readonly Map<int, String> MAP_STT_STRING_THIEN_CAN = new Map<int, String>()
                                                                         .withValue(1, "Giáp").withValue(2, "Ất")
                                                                         .withValue(3, "Bính").withValue(4, "Đinh")
                                                                         .withValue(5, "Mậu").withValue(6, "Kỷ")
                                                                         .withValue(7, "Canh").withValue(8, "Tân")
                                                                         .withValue(9, "Nhâm").withValue(10, "Quý");
-        // mapping số thứ tự với địa chi
+        // mapping số thứ tự với địa chi dùng để tính toán từ ngày -> 12 giờ tương ứng, từ năm -> 12 tháng tương ứng
         public static readonly Map<int, String> MAP_STT_STRING_DIACHI = new Map<int, String>()
                                                                                 .withValue(1, "Tý").withValue(2, "Sửu")
                                                                                 .withValue(3, "Dần").withValue(4, "Mão")
@@ -115,6 +115,7 @@ namespace Xem_Ngay.model.luc_thap_hoa_giap
                                                                                 .withValue(9, "Thân").withValue(10, "Dậu")
                                                                                 .withValue(11, "Tuất").withValue(12, "Hợi");
 
+        // mapping tháng dạng số sang tháng dạng địa chi VD: tháng 1 -> Tháng Dần
         public static readonly BiMap1Type<String> BIMAP_THANG_DIA_CHI = new BiMap1Type<string>()
                                                                             .with("1","Dần").with("2", "Mão")
                                                                             .with("3", "Thìn").with("4", "Tị")
@@ -126,9 +127,12 @@ namespace Xem_Ngay.model.luc_thap_hoa_giap
         // tất cả các hoa giáp
         public static readonly List<HoaGiap> ALL60HOAGIAP = new List<HoaGiap>() { GIAP_TY, AT_SUU, BINH_DAN, DINH_MAO, MAU_THIN, KY_TI, CANH_NGO, TAN_MUI, NHAM_THAN, QUY_DAU, GIAP_TUAT, AT_HOI, BINH_TY, DINH_SUU, MAU_DAN, KY_MAO, CANH_THIN, TAN_TI, NHAM_NGO, QUY_MUI, GIAP_THAN, AT_DAU, BINH_TUAT, DINH_HOI, MAU_TY, KY_SUU, CANH_DAN, TAN_MAO, NHAM_THIN, QUY_TI, GIAP_NGO, AT_MUI, BINH_THAN, DINH_DAU, MAU_TUAT, KY_HOI, CANH_TY, TAN_SUU, NHAM_DAN, QUY_MAO, GIAP_THIN, AT_TI, BINH_NGO, DINH_MUI, MAU_THAN, KY_DAU, CANH_TUAT, TAN_HOI, NHAM_TY, QUY_SUU, GIAP_DAN, AT_MAO, BINH_THIN, DINH_TI, MAU_NGO, KY_MUI, CANH_THAN, TAN_DAU, NHAM_TUAT, QUY_HOI };
 
+        // mapping tên hoa giáp với vị trí của nó trong ALL60HOAGIAP VD:  <"Giáp Tý",0>
         public static Map<string, int> MAP_HOA_GIAP_VI_TRI = new Map<string, int>();
 
+        // lưu trữ thông tin của những ngày trong 1 tháng của 1 năm được đọc từ file excel và sẽ load từ từ tránh load 1 lúc
         public static Map<string, List<ThongTinThang>> CACHE_THONG_TIN_THANG_NAM = new Map<string, List<ThongTinThang>>(); 
+        
         // load data when init value
         static LucThapHoaGiap()
         {
@@ -138,6 +142,8 @@ namespace Xem_Ngay.model.luc_thap_hoa_giap
             }
             Console.WriteLine("");
         }
+
+        // lấy ngày từ tháng dọc từ excel data -> 1 năm nhập 1 lần
         public static List<HoaGiap> layNgayTrongThangTrongNam(String tenNam, String tenThang)
         {
             List<HoaGiap> result = new List<HoaGiap>();
@@ -171,7 +177,42 @@ namespace Xem_Ngay.model.luc_thap_hoa_giap
             }
             return result;
         }
-        // kiểm tra hoa giáp nằm trong 1 khoảng
+        // Tìm những tháng thoả mãn ngày và năm KIỂM TRA NGƯỢC. Tức từ tên ngày -> tháng tương ứng nhưng năm phải tồn tại trong trong excel
+        public static List<String> timNhungThangThoaMan1HoaGiap(String tenNgay, String tenNam)
+        {
+            List<String> result = new List<String>();
+            tenNam = StringUtil.replaceMoreSpaceAndTrim(tenNam);
+            tenNgay = StringUtil.replaceMoreSpaceAndTrim(tenNgay);
+            // load cache 
+            List<ThongTinThang> thongtinThangTrongNam;
+            if (CACHE_THONG_TIN_THANG_NAM.ContainsKey(tenNam) == false)
+            {
+                // không tồn tại trong dữ liệu
+                thongtinThangTrongNam = DocGioiHanThangTrongNamExcel.layThongTinThangTuResourceBangTenNam(tenNam);
+                // save to cache =))
+                CACHE_THONG_TIN_THANG_NAM.add(tenNam, thongtinThangTrongNam);
+            }
+            else
+            {
+                // tồn tại trong resource
+                thongtinThangTrongNam = CACHE_THONG_TIN_THANG_NAM.get(tenNam);
+            }
+            foreach (ThongTinThang info in thongtinThangTrongNam)
+            {
+                if (checkViTriHoaGiapThoaMan1Khoang(tenNgay, info.ngayBatDau, info.ngayKetThuc) == true)
+                {
+                    // thêm vào kết quả
+                    String thangSo = info.thang;
+                    String thangChu = BIMAP_THANG_DIA_CHI.get(thangSo);
+                    if (thangChu == null || thangChu.Equals("")) continue; // data excel bị lỗi Vd: làm gì có tháng 13
+                    result.Add(thangChu);
+                }
+            }
+
+            return result; // [Sửu, Dần, Thân,....]
+        }
+
+        // kiểm tra hoa giáp nằm trong 1 khoảng nào đó không vd: kiểm tra hoa giáp Quý tị có nằm trong khoảng từ Giáp Tý-Canh Thân không ?
         public static bool checkViTriHoaGiapThoaMan1Khoang(String hoaGiap, String hoaGiapBatDau, String HoaGiapKetThuc)
         {
             int iHoa = MAP_HOA_GIAP_VI_TRI.get(hoaGiap);
@@ -189,12 +230,33 @@ namespace Xem_Ngay.model.luc_thap_hoa_giap
 
             return false;
         }
+        // tìm HoaGiap them Năm VD: 2021: Tân Sửu
+        public static HoaGiap timHoaGiapTheoNam(int nam)
+        {
+            int viTriNam2000CanhThin = timViTriHoaGiapBangTen("Canh Thìn");
+            int khoangCach = nam - 2000;
+            int viCanTim = -1;
+            if (khoangCach == 0 || khoangCach % 60 == 0) return timHoaGiapTuViTri(viTriNam2000CanhThin);
+            if(khoangCach > 0)
+            {
+                viCanTim = (viTriNam2000CanhThin + khoangCach) % 60;
+            }
+            else
+            {
+                //  nho hon nam 2000 // that ra eo ranh lam viec nay
+                khoangCach = khoangCach + 60;
+                viCanTim = (viTriNam2000CanhThin + khoangCach) % 60;
+            }
 
+            return timHoaGiapTuViTri(viCanTim);
+        }
+        // tìm hoa giáp từ vị trí của nó trong 60 hoa giáp: VD 0 -> Giáp Tý
         public static HoaGiap timHoaGiapTuViTri(int position)
         {
             if (position < 0 || position > 59) return null;
             return ALL60HOAGIAP[position];
         }
+        // tìm vị trí hoa giáp từ vị trí của nó trong 60 hoa giáp
         public static int timViTriHoaGiapBangTen(String ten)
         {
             if (MAP_HOA_GIAP_VI_TRI.ContainsKey(ten)) return MAP_HOA_GIAP_VI_TRI.get(ten);
@@ -209,6 +271,24 @@ namespace Xem_Ngay.model.luc_thap_hoa_giap
             foreach(HoaGiap hoaGiap in ALL60HOAGIAP)
             {
                 if (hoaGiap.ten.ToLower().IndexOf(ten) > -1) result.Add(hoaGiap);
+            }
+            return result;
+        }
+        // tìm tất cả các hoa giáp thoả mãn thuộc 1 dãy tên input
+        public static List<HoaGiap> timHoaGiapThuoc1ListTen(List<String> listTen)
+        {
+            List<HoaGiap> result = new List<HoaGiap>();
+            foreach (HoaGiap hoaGiap in ALL60HOAGIAP)
+            {
+                String tenHoaGiapTemp = hoaGiap.ten.ToUpper();
+                foreach(String tc in listTen)
+                {
+                    if (tenHoaGiapTemp.IndexOf(tc.Trim().ToUpper()) > -1) {
+                        result.Add(hoaGiap);
+                        break;
+                    };
+                }
+               
             }
             return result;
         }
@@ -261,8 +341,18 @@ namespace Xem_Ngay.model.luc_thap_hoa_giap
             }
             return result;
         }
+        public static List<HoaGiap> locListHoaGiapByMapLogic(List<HoaGiap> lstHoaGiap, Map<String, List<String>> logic)
+        {
+            List<HoaGiap> result = new List<HoaGiap>();
+            foreach (HoaGiap hoaGiap in lstHoaGiap)
+            {
+                if (hoaGiap.thoaManDieuKien(logic) == true) result.Add(hoaGiap);
+            }
+            return result;
+        }
 
-        // lấy lần lượt các hoa giáp theo 1 khoảng : VD từ Mậu Thân đến Quý Sửu: MAU_THAN,KY_DAU,CANH_TUAT,TAN_HOI,NHAM_TY,QUY_SUU
+        // lấy lần lượt các hoa giáp theo 1 khoảng để xác định ngày bắt đầu 1 tháng cho đến ngày kết thúc của tháng
+        // VD từ Mậu Thân đến Quý Sửu: MAU_THAN,KY_DAU,CANH_TUAT,TAN_HOI,NHAM_TY,QUY_SUU
         public static List<HoaGiap> layCacHoaGiapTheo1Khoang(String hoaGiapBatDau , String hoaGiapKetThuc)
         {
             hoaGiapBatDau = hoaGiapBatDau.ToUpper().Trim();

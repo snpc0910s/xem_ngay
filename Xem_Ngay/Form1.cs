@@ -8,7 +8,10 @@ using System.Text;
 using System.Windows.Forms;
 using Xem_Ngay.model._64que;
 using Xem_Ngay.model.luc_thap_hoa_giap;
-using Xem_Ngay.ultility.excel_data_source;
+using Xem_Ngay.ultility;
+using Xem_Ngay.model.hado_lacthu;
+using Xem_Ngay.model.son_huong;
+
 namespace Xem_Ngay
 {
     public partial class Form1 : Form
@@ -42,6 +45,13 @@ namespace Xem_Ngay
             //bool check1 = LucThapHoaGiap.checkViTriHoaGiapThoaMan1Khoang("Mậu Thìn","Ất Sửu","Canh Ngọ"); // true
             //bool check2 = LucThapHoaGiap.checkViTriHoaGiapThoaMan1Khoang("Quý Hợi", "Nhâm Tuất", "Bính Dần");
             //bool check3 = LucThapHoaGiap.checkViTriHoaGiapThoaMan1Khoang("", "", "");
+
+            //int[,] lacthuSo = LacThu.tao1LacThuSoCuaNam(2022);
+            //String loging = LacThu.hienThiTheoLacThuSo(lacthuSo);
+            //this.logNam.AppendText(loging);
+            //String statusNguHoang = LacThu.timNguHoangDuaVaoNam(2021);
+            //this.logNam.AppendText(statusNguHoang);
+
         }
         // init some thing
         public void initBoldKQQuaiKhiHKDQ() {
@@ -86,9 +96,22 @@ namespace Xem_Ngay
         // tìm kiếm
         private void btnTimNam_Click(object sender, EventArgs e)
         {
-            String input = this.txtNam.Text.ToLower().Trim();
+            String input = StringUtil.replaceMoreSpaceAndTrim(this.txtNam.Text);
             if (input.Equals("")) return;
-            List<HoaGiap> hoaGiaps = LucThapHoaGiap.timHoaGiapByTen(input);
+            List<HoaGiap> hoaGiaps = null;
+            // detect Nam
+            if (RegexUtil.laNam(input))
+            {
+                HoaGiap hoaGiapTimDuoc = LucThapHoaGiap.timHoaGiapTheoNam(Convert.ToInt32(input));
+                List<HoaGiap> lTemp = new List<HoaGiap>();
+                lTemp.Add(hoaGiapTimDuoc);
+                hoaGiaps = lTemp;
+            }
+            else
+            {
+                hoaGiaps = LucThapHoaGiap.timHoaGiapByTen(input);
+            }
+            if (hoaGiaps == null) return;
             List<HoaGiapDonGian> hoagiapdongian = LucThapHoaGiap.listHoaGiapToHoaGiapDonGian(hoaGiaps);
             this.updateListHoaGiapDonGianToDataGrid(this.gridNam, hoagiapdongian);
             // reset trụ tháng
@@ -97,7 +120,7 @@ namespace Xem_Ngay
 
         private void btnTimThang_Click(object sender, EventArgs e)
         {
-            String input = this.txtThang.Text.ToLower().Trim();
+            String input = StringUtil.replaceMoreSpaceAndTrim(this.txtThang.Text);
             if (input.Equals("")) return;
             List<HoaGiap> hoaGiaps = LucThapHoaGiap.locListHoaGiapByLogic(saverThang, input); // loc
             List<HoaGiapDonGian> hoagiapdongian = LucThapHoaGiap.listHoaGiapToHoaGiapDonGian(hoaGiaps);
@@ -107,7 +130,28 @@ namespace Xem_Ngay
         {
             String input = this.txtNgay.Text.ToLower().Trim();
             if (input.Equals("")) return;
-            List<HoaGiap> hoaGiaps = LucThapHoaGiap.locListHoaGiapByLogic(saverNgay, input); // loc
+            // chỉ có ngày mới được phép được search trong 64 quẻ không phụ thuộc vào tháng
+            // bình thường sẽ click chọn ngày thì mới gen ra tháng. nhưng ở đây là đặc biệt được phép chọn ngày trước rồi quyết định chọn tháng sau
+            // không được chọn tháng trước
+            Map<String, List<String>> logic = HoaGiap.chuyenStringToMapLogic(input);
+            List<HoaGiap> hoaGiaps = null;
+            // chỉ cần tồn tại 1 trong các key sau thì sẽ ưu tiên số 1 bỏ qua các cái khác
+            //if (logic.ContainsKey("s64"))
+            //{   // s64 là search trong 64 quẻ
+            //    List<String> listSearch = logic.get("s64");
+            //    // hiện tại không phát triển tính năng search trong 64 quẻ
+            //}
+            if (logic.ContainsKey("s60"))
+            {   // s64 là search trong 60 hoa giáp muốn chọn ngày trước rồi gợi ý ngược lại tháng thôi
+                List<String> listSearch = logic.get("s60");
+                hoaGiaps = LucThapHoaGiap.timHoaGiapThuoc1ListTen(listSearch);
+            }
+            // lọc như bình thường. nếu không tồn tại các key trên
+            if (logic.ContainsKey("s64") == false && logic.ContainsKey("s60") == false)
+            {
+                hoaGiaps = LucThapHoaGiap.locListHoaGiapByMapLogic(saverNgay, logic); // loc
+            }
+            if (hoaGiaps == null) hoaGiaps  = new List<HoaGiap>(); // rỗng
             List<HoaGiapDonGian> hoagiapdongian = LucThapHoaGiap.listHoaGiapToHoaGiapDonGian(hoaGiaps);
             this.updateListHoaGiapDonGianToDataGrid(this.gridNgay, hoagiapdongian);
             // reset trụ giờ
@@ -121,12 +165,12 @@ namespace Xem_Ngay
             List<HoaGiap> hoaGiaps = LucThapHoaGiap.locListHoaGiapByLogic(saverGio, input); // loc
             List<HoaGiapDonGian> hoagiapdongian = LucThapHoaGiap.listHoaGiapToHoaGiapDonGian(hoaGiaps);
             this.updateListHoaGiapDonGianToDataGrid(this.gridGio, hoagiapdongian);
-           
+            this.updateMauSacNgayVaDem(); // màu sắc ngày và đêm
         }
 
         private void btnTimToa_Click(object sender, EventArgs e)
         {
-            String input = this.txtToa.Text.ToLower().Trim();
+            String input = StringUtil.replaceMoreSpaceAndTrim(this.txtToa.Text);
             if (input.Equals("")) return;
             List<HoaGiap> hoaGiaps = LucThapHoaGiap.timHoaGiapByTen(input);
             List<HoaGiapDonGian> hoagiapdongian = LucThapHoaGiap.listHoaGiapToHoaGiapDonGian(hoaGiaps);
@@ -135,18 +179,44 @@ namespace Xem_Ngay
 
         private void btnTimGC1_Click(object sender, EventArgs e)
         {
-            String input = this.txtGC1.Text.ToLower().Trim();
+            String input = StringUtil.replaceMoreSpaceAndTrim(this.txtGC1.Text);
             if (input.Equals("")) return;
-            List<HoaGiap> hoaGiaps = LucThapHoaGiap.timHoaGiapByTen(input);
+            List<HoaGiap> hoaGiaps = null;
+            // detect Nam
+            if (RegexUtil.laNam(input))
+            {
+                HoaGiap hoaGiapTimDuoc = LucThapHoaGiap.timHoaGiapTheoNam(Convert.ToInt32(input));
+                List<HoaGiap> lTemp = new List<HoaGiap>();
+                lTemp.Add(hoaGiapTimDuoc);
+                hoaGiaps = lTemp;
+            }
+            else
+            {
+                hoaGiaps = LucThapHoaGiap.timHoaGiapByTen(input);
+            }
+            if (hoaGiaps == null) return;
             List<HoaGiapDonGian> hoagiapdongian = LucThapHoaGiap.listHoaGiapToHoaGiapDonGian(hoaGiaps);
             this.updateListHoaGiapDonGianToDataGrid(this.gridGC1, hoagiapdongian);
         }
 
         private void btnTimGC2_Click(object sender, EventArgs e)
         {
-            String input = this.txtGC2.Text.ToLower().Trim();
+            String input = StringUtil.replaceMoreSpaceAndTrim(this.txtGC2.Text);
             if (input.Equals("")) return;
-            List<HoaGiap> hoaGiaps = LucThapHoaGiap.timHoaGiapByTen(input);
+            List<HoaGiap> hoaGiaps = null;
+            // detect Nam
+            if (RegexUtil.laNam(input))
+            {
+                HoaGiap hoaGiapTimDuoc = LucThapHoaGiap.timHoaGiapTheoNam(Convert.ToInt32(input));
+                List<HoaGiap> lTemp = new List<HoaGiap>();
+                lTemp.Add(hoaGiapTimDuoc);
+                hoaGiaps = lTemp;
+            }
+            else
+            {
+                hoaGiaps = LucThapHoaGiap.timHoaGiapByTen(input);
+            }
+            if (hoaGiaps == null) return;
             List<HoaGiapDonGian> hoagiapdongian = LucThapHoaGiap.listHoaGiapToHoaGiapDonGian(hoaGiaps);
             this.updateListHoaGiapDonGianToDataGrid(this.gridGC2, hoagiapdongian);
         }
@@ -168,15 +238,42 @@ namespace Xem_Ngay
             for(int i = 0; i < allRow-1; i++)
             {
                 // update quai khi
-                String valueCell = grid.Rows[i].Cells[0].Value.ToString();
+                String valueCell = grid.Rows[i].Cells[0].Value.ToString(); // cot quai khi
                 Color c = this.mauSacTheoHKDQQuaiKhiString(valueCell);
                 grid.Rows[i].Cells[0].Style.ForeColor = c;
 
                 // quai van
-                String valueCell2 = grid.Rows[i].Cells[2].Value.ToString();
+                String valueCell2 = grid.Rows[i].Cells[2].Value.ToString(); // cot quai van
                 Color c2 = this.mauSacTheoHKDQQuaiKhiString(valueCell2);
                 grid.Rows[i].Cells[2].Style.ForeColor = c2;
 
+            }
+        }
+        // update ngày và đêm của ngày
+        private void updateMauSacNgayVaDem()
+        {
+            int allRow = this.gridGio.Rows.Count;
+            for (int i = 0; i < allRow - 1; i++)
+            {
+                String valueCell = this.gridGio.Rows[i].Cells[3].Value.ToString(); // cot hoa giap
+                if(valueCell.IndexOf("Mão") > -1 || valueCell.IndexOf("Dậu") > -1) 
+                       this.gridGio.Rows[i].Cells[1].Style.BackColor = Color.DarkGray;
+                if (valueCell.IndexOf("Tuất") > -1 || 
+                    valueCell.IndexOf("Hợi") > -1 || 
+                    valueCell.IndexOf("Tý") > -1 || 
+                    valueCell.IndexOf("Sửu") > -1 || 
+                    valueCell.IndexOf("Dần") > -1)
+                {
+                    this.gridGio.Rows[i].Cells[1].Style.BackColor = Color.Gray;
+                }
+            }
+        }
+        public void resetMauThang()
+        {
+            int allRow = this.gridThang.Rows.Count;
+            for (int i = 0; i < allRow - 1; i++)
+            {
+                this.gridThang.Rows[i].Cells[1].Style.BackColor = Color.White;
             }
         }
         // end tìm kiếm
@@ -364,6 +461,8 @@ namespace Xem_Ngay
             saverGio = hoaGiaps;
             List<HoaGiapDonGian> hoagiapdongian = LucThapHoaGiap.listHoaGiapToHoaGiapDonGian(hoaGiaps);
             this.updateListHoaGiapDonGianToDataGrid(this.gridGio, hoagiapdongian);
+            this.updateMauSacNgayVaDem(); // màu sắc ngày và đêm của giờ
+            this.resetMauThang(); // reset chonj mau thang
         }
 
         private void gridGio_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -516,6 +615,49 @@ namespace Xem_Ngay
         private void resetGC2_Click(object sender, EventArgs e)
         {
             this.resetCotGC2();
+        }
+        // tìm tháng từ ngày phục vụ cho việc tìm ngày rồi mới tìm tháng
+        private void btnTimThangTuNgay_Click(object sender, EventArgs e)
+        {
+            String tenHoaGiapNam = this.kqNamHoaGiap.Text;
+            String tenHoaGiapNgay = this.kqNgayHoaGiap.Text;
+            if(tenHoaGiapNam.Equals("--") || tenHoaGiapNgay.Equals("--"))
+            {
+                // show dialog thông báo
+                return;
+            }else
+            {
+                List<String> listThangTimDuoc = LucThapHoaGiap.timNhungThangThoaMan1HoaGiap(tenHoaGiapNgay,tenHoaGiapNam);
+                this.boiMauThangThoaManNgayTrongNam(listThangTimDuoc);
+            }
+        }
+        // bôi màu tháng thoả mãn ngày và năm
+        private void boiMauThangThoaManNgayTrongNam(List<String> listThangTimDuoc)
+        {
+            int allRow = this.gridThang.Rows.Count;
+            for (int i = 0; i < allRow - 1; i++)
+            {
+                String valueCell = this.gridThang.Rows[i].Cells[3].Value.ToString(); // cot hoa giap
+                bool keyActive = false;
+                foreach(String tenThang in listThangTimDuoc)
+                {
+                    if(valueCell.IndexOf(tenThang) > -1)
+                    {
+                        keyActive = true;
+                        break;
+                    }
+                }
+                if(keyActive == true)
+                {
+                    // bôi màu
+                    this.gridThang.Rows[i].Cells[1].Style.BackColor = Color.LightGreen;
+                }
+                else
+                {
+                    // không bôi màu
+                    this.gridThang.Rows[i].Cells[1].Style.BackColor = Color.White;
+                }
+            }
         }
     }
 }
