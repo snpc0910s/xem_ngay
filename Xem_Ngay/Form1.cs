@@ -11,6 +11,9 @@ using Xem_Ngay.model.luc_thap_hoa_giap;
 using Xem_Ngay.ultility;
 using Xem_Ngay.model.hado_lacthu;
 using Xem_Ngay.model.son_huong;
+using Xem_Ngay.ui_layout.dialog;
+using Xem_Ngay.common;
+using Xem_Ngay.model.other;
 
 namespace Xem_Ngay
 {
@@ -34,6 +37,8 @@ namespace Xem_Ngay
             this.intitDataSourceExcel();
             // end init ************************************
 
+            // than duye
+
             // test
             //List<HoaGiap> hoaGiaps = LucThapHoaGiap.layCacHoaGiapTheo1Khoang("bính dần", "canh ngọ");
             //String filter = "bt:Đinh;bd:Thìn,Dần;bk:2;bv:2";
@@ -52,6 +57,18 @@ namespace Xem_Ngay
             //String statusNguHoang = LacThu.timNguHoangDuaVaoNam(2021);
             //this.logNam.AppendText(statusNguHoang);
 
+            // test thai tue tue pha
+            // test thuan tu nghich tu AllQueDich.kiemTraThanDuyen2QueTheoTen("Càn vi Thiên", "Địa Lôi Phục");
+            Map<String, String> tatCaTru = new Map<string, String>();
+            tatCaTru.add("nam", "Phong Hoả Gia Nhân");
+            tatCaTru.add("thang", "Lôi Phong Hằng");
+            tatCaTru.add("ngay", "Địa Phong Thăng");
+            tatCaTru.add("gio", "Sơn Thuỷ Mông");
+            //tatCaTru.add("toa", "Trạch Sơn Hàm");
+            //tatCaTru.add("gc1", "Thuỷ Trạch Tiết");
+            //tatCaTru.add("gc2", "Trạch Sơn Hàm");
+            TableFixed<String, String, String> report = ThanDuyen48Que.reportThanDuyen(tatCaTru);
+            logToa.AppendText(report.toStringTableFixed());
         }
         // init some thing
         public void initBoldKQQuaiKhiHKDQ() {
@@ -172,9 +189,50 @@ namespace Xem_Ngay
         {
             String input = StringUtil.replaceMoreSpaceAndTrim(this.txtToa.Text);
             if (input.Equals("")) return;
-            List<HoaGiap> hoaGiaps = LucThapHoaGiap.timHoaGiapByTen(input);
-            List<HoaGiapDonGian> hoagiapdongian = LucThapHoaGiap.listHoaGiapToHoaGiapDonGian(hoaGiaps);
-            this.updateListHoaGiapDonGianToDataGrid(this.gridToa, hoagiapdongian);
+
+            if (RegexUtil.laToaDo(input))
+            {
+
+                double toaDoCanTim = RegexUtil.layToaDo(input);
+                // phát hiện toạ độ
+                String tenQue = DoHinh64Que.timTenQueBangToaDo(toaDoCanTim);
+                if(tenQue == null || tenQue.Equals(""))
+                {
+                    // không tìm thấy ten quẻ báo lỗi
+                    return;
+                }
+                // tìm thấy
+                HoaGiap hoaGiapTimDuoc = LucThapHoaGiap.timHoaGiapBangTenQue(tenQue);
+                if(hoaGiapTimDuoc == null)
+                {
+                    // không thể tìm thấy hoa giáp tương ứng
+                    return;
+                }
+                // tìm được hoa giáp
+                //double toaDoHuong = 0;
+                //if (toaDoCanTim >= 180) toaDoHuong = toaDoCanTim - 180;
+                //if (toaDoCanTim < 180) toaDoHuong = toaDoCanTim + 180;
+                //this.logToa.AppendText("Toạ: " + DoHinh24SonHuong.timTen24SonBangToaDo(toaDoCanTim));
+                //this.logToa.AppendText(Environment.NewLine);
+                //this.logToa.AppendText("Hướng:" + DoHinh24SonHuong.timTen24SonBangToaDo(toaDoHuong));
+
+                // xác định chính xác quẻ khi nhập toạ độ
+                Que queChinhXac = null;
+                foreach(Que queT in hoaGiapTimDuoc.ques)
+                {
+                    if (queT.ten.ToUpper().Equals(tenQue.ToUpper())) queChinhXac = queT;
+                }
+                List<HoaGiapDonGian> hoagiapdongian = new List<HoaGiapDonGian>();
+                hoagiapdongian.Add(new HoaGiapDonGian(hoaGiapTimDuoc.ten, queChinhXac.quaiKhi, queChinhXac.ten, queChinhXac.quaiVan));
+                this.updateListHoaGiapDonGianToDataGrid(this.gridToa, hoagiapdongian);
+            }
+            else
+            {   // tìm bằng hoa giáp như bình thường
+                List<HoaGiap> hoaGiaps = LucThapHoaGiap.timHoaGiapByTen(input);
+                List<HoaGiapDonGian> hoagiapdongian = LucThapHoaGiap.listHoaGiapToHoaGiapDonGian(hoaGiaps);
+                this.updateListHoaGiapDonGianToDataGrid(this.gridToa, hoagiapdongian);
+            }
+           
         }
 
         private void btnTimGC1_Click(object sender, EventArgs e)
@@ -658,6 +716,41 @@ namespace Xem_Ngay
                     this.gridThang.Rows[i].Cells[1].Style.BackColor = Color.White;
                 }
             }
+        }
+
+        private void bntAmDuongQue_Click(object sender, EventArgs e)
+        {
+            Map<String, String> tatCaTru = new Map<string, String>();
+            if(kqNamQue.Text.Equals("--") == false)
+            {
+                tatCaTru.add("nam", kqNamQue.Text);
+            }
+            if (kqThangQue.Text.Equals("--") == false)
+            {
+                tatCaTru.add("thang", kqThangQue.Text);
+            }
+            if (kqNgayQue.Text.Equals("--") == false)
+            {
+                tatCaTru.add("ngay", kqNgayQue.Text);
+            }
+            if (kqGioQue.Text.Equals("--") == false)
+            {
+                tatCaTru.add("gio", kqGioQue.Text);
+            }
+            if (kqToaQue.Text.Equals("--") == false)
+            {
+                tatCaTru.add("toa", kqToaQue.Text);
+            }
+            if (kqGC1Que.Text.Equals("--") == false)
+            {
+                tatCaTru.add("gc1", kqGC1Que.Text);
+            }
+            if (kqGC2Que.Text.Equals("--") == false)
+            {
+                tatCaTru.add("gc2", kqGC2Que.Text);
+            }
+            TableFixed<String, String, String> report = ThanDuyen48Que.reportThanDuyen(tatCaTru);
+            Console.WriteLine("");
         }
     }
 }

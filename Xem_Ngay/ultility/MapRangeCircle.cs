@@ -48,7 +48,7 @@ namespace Xem_Ngay.ultility
         public MapRangeCircle<T> withListKey(List<T> listKey, double pointStart)
         {
             int allkey = listKey.Count;
-            double range = 360 / allkey; // vd 24 son huong thi co 15 do 1 cung
+            double range = 360*1.0 / allkey; // vd 24 son huong thi co 15 do 1 cung
             for (int i = 0; i < allkey; i++)
             {
                 T value = listKey[i];
@@ -56,13 +56,14 @@ namespace Xem_Ngay.ultility
                 double toaDo2 = pointStart + range;
                 if (toaDo2 > 360) toaDo2 = toaDo2 - 360;
                 this.add(value, toaDo1, toaDo2);
+                pointStart = toaDo2;
             }
             return this;
         }
         public MapRangeCircle<T> withListKeyRemoveEpsilon(List<T> listKey, double pointStart, double epsilon)
         {
             int allkey = listKey.Count;
-            double range = 360 / allkey; // vd 24 son huong thi co 15 do 1 cung
+            double range = 360*1.0 / allkey; // vd 24 son huong thi co 15 do 1 cung
             for(int i = 0; i < allkey; i++)
             {
                 T value = listKey[i];

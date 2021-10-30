@@ -15,3 +15,4 @@ C:\Users\Tam Minh\source\repos\Xem_Ngay\Xem_Ngay\obj\Debug\Xem_Ngay.csproj.CopyC
 C:\Users\Tam Minh\source\repos\Xem_Ngay\Xem_Ngay\bin\Debug\ExcelDataReader.DataSet.dll
 C:\Users\Tam Minh\source\repos\Xem_Ngay\Xem_Ngay\bin\Debug\ExcelDataReader.DataSet.pdb
 C:\Users\Tam Minh\source\repos\Xem_Ngay\Xem_Ngay\bin\Debug\ExcelDataReader.DataSet.xml
+C:\Users\Tam Minh\source\repos\Xem_Ngay\Xem_Ngay\obj\Debug\Xem_Ngay.ui_layout.dialog.DialogInfo.resources

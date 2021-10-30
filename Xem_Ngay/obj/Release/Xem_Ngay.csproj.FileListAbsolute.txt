@@ -15,3 +15,4 @@ C:\Users\Tam Minh\source\repos\Xem_Ngay\Xem_Ngay\obj\Release\Xem_Ngay.csproj.Cor
 C:\Users\Tam Minh\source\repos\Xem_Ngay\Xem_Ngay\obj\Release\Xem_Ngay.csproj.CopyComplete
 C:\Users\Tam Minh\source\repos\Xem_Ngay\Xem_Ngay\obj\Release\Xem_Ngay.exe
 C:\Users\Tam Minh\source\repos\Xem_Ngay\Xem_Ngay\obj\Release\Xem_Ngay.pdb
+C:\Users\Tam Minh\source\repos\Xem_Ngay\Xem_Ngay\obj\Release\Xem_Ngay.ui_layout.dialog.DialogInfo.resources

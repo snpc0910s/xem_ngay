@@ -61,5 +61,17 @@ namespace Xem_Ngay.ultility
             if (this.isContain(pRow, pCol)) return this.table.get(pRow).get(pCol);
             return default(V);
         }
+        public List<V> getListValueByRow(int row){
+            List<V> result = new List<V>();
+            if (table.ContainsKey(row))
+            {
+                Map<int, V> multiValues = table.get(row);
+                foreach(KeyValuePair<int,V> keypair in multiValues)
+                {
+                    result.Add(keypair.Value);
+                }
+            }
+            return result;
+        }
     }
 }

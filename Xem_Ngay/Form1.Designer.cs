@@ -90,6 +90,7 @@ namespace Xem_Ngay
             this.quaiVan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tenHoaGiap = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.btnTimThangTuNgay = new System.Windows.Forms.Label();
             this.btnTimNgay = new System.Windows.Forms.Button();
             this.txtNgay = new System.Windows.Forms.TextBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
@@ -108,6 +109,7 @@ namespace Xem_Ngay
             this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel8 = new System.Windows.Forms.Panel();
+            this.logToa = new System.Windows.Forms.RichTextBox();
             this.btnTimToa = new System.Windows.Forms.Button();
             this.txtToa = new System.Windows.Forms.TextBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
@@ -117,6 +119,7 @@ namespace Xem_Ngay
             this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel9 = new System.Windows.Forms.Panel();
+            this.logGC1 = new System.Windows.Forms.RichTextBox();
             this.btnTimGC1 = new System.Windows.Forms.Button();
             this.txtGC1 = new System.Windows.Forms.TextBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
@@ -126,6 +129,7 @@ namespace Xem_Ngay
             this.dataGridViewTextBoxColumn23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel10 = new System.Windows.Forms.Panel();
+            this.logGC2 = new System.Windows.Forms.RichTextBox();
             this.btnTimGC2 = new System.Windows.Forms.Button();
             this.txtGC2 = new System.Windows.Forms.TextBox();
             this.groupNgay = new System.Windows.Forms.GroupBox();
@@ -144,18 +148,16 @@ namespace Xem_Ngay
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.logNam = new System.Windows.Forms.RichTextBox();
             this.btnTimNam = new System.Windows.Forms.Button();
             this.txtNam = new System.Windows.Forms.TextBox();
             this.groupNam = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.btnTimThangTuNgay = new System.Windows.Forms.Label();
-            this.logToa = new System.Windows.Forms.RichTextBox();
-            this.logGC1 = new System.Windows.Forms.RichTextBox();
-            this.logGC2 = new System.Windows.Forms.RichTextBox();
-            this.logNam = new System.Windows.Forms.RichTextBox();
+            this.bntAmDuongQue = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.groupBox13.SuspendLayout();
             this.groupBox12.SuspendLayout();
             this.groupBox11.SuspendLayout();
             this.groupBox10.SuspendLayout();
@@ -216,6 +218,7 @@ namespace Xem_Ngay
             // 
             // groupBox13
             // 
+            this.groupBox13.Controls.Add(this.bntAmDuongQue);
             this.groupBox13.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox13.Location = new System.Drawing.Point(970, 16);
             this.groupBox13.Name = "groupBox13";
@@ -874,6 +877,16 @@ namespace Xem_Ngay
             this.panel3.Size = new System.Drawing.Size(118, 79);
             this.panel3.TabIndex = 7;
             // 
+            // btnTimThangTuNgay
+            // 
+            this.btnTimThangTuNgay.AutoSize = true;
+            this.btnTimThangTuNgay.Location = new System.Drawing.Point(3, 3);
+            this.btnTimThangTuNgay.Name = "btnTimThangTuNgay";
+            this.btnTimThangTuNgay.Size = new System.Drawing.Size(54, 13);
+            this.btnTimThangTuNgay.TabIndex = 0;
+            this.btnTimThangTuNgay.Text = "Tìm tháng";
+            this.btnTimThangTuNgay.Click += new System.EventHandler(this.btnTimThangTuNgay_Click);
+            // 
             // btnTimNgay
             // 
             this.btnTimNgay.Dock = System.Windows.Forms.DockStyle.Top;
@@ -1029,6 +1042,15 @@ namespace Xem_Ngay
             this.panel8.Size = new System.Drawing.Size(147, 79);
             this.panel8.TabIndex = 9;
             // 
+            // logToa
+            // 
+            this.logToa.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.logToa.Location = new System.Drawing.Point(0, 0);
+            this.logToa.Name = "logToa";
+            this.logToa.Size = new System.Drawing.Size(147, 79);
+            this.logToa.TabIndex = 1;
+            this.logToa.Text = "";
+            // 
             // btnTimToa
             // 
             this.btnTimToa.Dock = System.Windows.Forms.DockStyle.Top;
@@ -1107,6 +1129,15 @@ namespace Xem_Ngay
             this.panel9.Size = new System.Drawing.Size(143, 79);
             this.panel9.TabIndex = 11;
             // 
+            // logGC1
+            // 
+            this.logGC1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.logGC1.Location = new System.Drawing.Point(0, 0);
+            this.logGC1.Name = "logGC1";
+            this.logGC1.Size = new System.Drawing.Size(143, 79);
+            this.logGC1.TabIndex = 1;
+            this.logGC1.Text = "";
+            // 
             // btnTimGC1
             // 
             this.btnTimGC1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -1184,6 +1215,15 @@ namespace Xem_Ngay
             this.panel10.Name = "panel10";
             this.panel10.Size = new System.Drawing.Size(143, 79);
             this.panel10.TabIndex = 13;
+            // 
+            // logGC2
+            // 
+            this.logGC2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.logGC2.Location = new System.Drawing.Point(0, 0);
+            this.logGC2.Name = "logGC2";
+            this.logGC2.Size = new System.Drawing.Size(143, 79);
+            this.logGC2.TabIndex = 1;
+            this.logGC2.Text = "";
             // 
             // btnTimGC2
             // 
@@ -1340,6 +1380,15 @@ namespace Xem_Ngay
             this.panel6.Size = new System.Drawing.Size(191, 79);
             this.panel6.TabIndex = 9;
             // 
+            // logNam
+            // 
+            this.logNam.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.logNam.Location = new System.Drawing.Point(0, 0);
+            this.logNam.Name = "logNam";
+            this.logNam.Size = new System.Drawing.Size(191, 79);
+            this.logNam.TabIndex = 2;
+            this.logNam.Text = "";
+            // 
             // btnTimNam
             // 
             this.btnTimNam.Dock = System.Windows.Forms.DockStyle.Top;
@@ -1388,51 +1437,15 @@ namespace Xem_Ngay
             this.textBox1.Size = new System.Drawing.Size(146, 20);
             this.textBox1.TabIndex = 0;
             // 
-            // btnTimThangTuNgay
+            // bntAmDuongQue
             // 
-            this.btnTimThangTuNgay.AutoSize = true;
-            this.btnTimThangTuNgay.Location = new System.Drawing.Point(3, 3);
-            this.btnTimThangTuNgay.Name = "btnTimThangTuNgay";
-            this.btnTimThangTuNgay.Size = new System.Drawing.Size(54, 13);
-            this.btnTimThangTuNgay.TabIndex = 0;
-            this.btnTimThangTuNgay.Text = "Tìm tháng";
-            this.btnTimThangTuNgay.Click += new System.EventHandler(this.btnTimThangTuNgay_Click);
-            // 
-            // logToa
-            // 
-            this.logToa.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.logToa.Location = new System.Drawing.Point(0, 0);
-            this.logToa.Name = "logToa";
-            this.logToa.Size = new System.Drawing.Size(147, 79);
-            this.logToa.TabIndex = 1;
-            this.logToa.Text = "";
-            // 
-            // logGC1
-            // 
-            this.logGC1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.logGC1.Location = new System.Drawing.Point(0, 0);
-            this.logGC1.Name = "logGC1";
-            this.logGC1.Size = new System.Drawing.Size(143, 79);
-            this.logGC1.TabIndex = 1;
-            this.logGC1.Text = "";
-            // 
-            // logGC2
-            // 
-            this.logGC2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.logGC2.Location = new System.Drawing.Point(0, 0);
-            this.logGC2.Name = "logGC2";
-            this.logGC2.Size = new System.Drawing.Size(143, 79);
-            this.logGC2.TabIndex = 1;
-            this.logGC2.Text = "";
-            // 
-            // logNam
-            // 
-            this.logNam.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.logNam.Location = new System.Drawing.Point(0, 0);
-            this.logNam.Name = "logNam";
-            this.logNam.Size = new System.Drawing.Size(191, 79);
-            this.logNam.TabIndex = 2;
-            this.logNam.Text = "";
+            this.bntAmDuongQue.AutoSize = true;
+            this.bntAmDuongQue.Location = new System.Drawing.Point(7, 20);
+            this.bntAmDuongQue.Name = "bntAmDuongQue";
+            this.bntAmDuongQue.Size = new System.Drawing.Size(119, 13);
+            this.bntAmDuongQue.TabIndex = 0;
+            this.bntAmDuongQue.Text = "Kiểm tra Âm Dương quẻ";
+            this.bntAmDuongQue.Click += new System.EventHandler(this.bntAmDuongQue_Click);
             // 
             // Form1
             // 
@@ -1447,6 +1460,8 @@ namespace Xem_Ngay
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
+            this.groupBox13.ResumeLayout(false);
+            this.groupBox13.PerformLayout();
             this.groupBox12.ResumeLayout(false);
             this.groupBox12.PerformLayout();
             this.groupBox11.ResumeLayout(false);
@@ -1623,6 +1638,7 @@ namespace Xem_Ngay
         private System.Windows.Forms.RichTextBox logGC1;
         private System.Windows.Forms.RichTextBox logGC2;
         private System.Windows.Forms.RichTextBox logNam;
+        private System.Windows.Forms.Label bntAmDuongQue;
     }
 }
 

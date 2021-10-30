@@ -22,9 +22,15 @@ namespace Xem_Ngay.ultility
         public static bool laToaDo(String sNumber)
         {
             if (REGEX_NUMBER.IsMatch(sNumber) == false) return false;
+            sNumber = sNumber.Replace(',', '.');
             double doSo = Convert.ToDouble(sNumber);
             if (doSo >= 0 && doSo <= 359.9999999999) return true;
             return false;
+        }
+        public static double layToaDo(String sNumber)
+        {
+            sNumber = sNumber.Replace(',', '.');
+            return Convert.ToDouble(sNumber);
         }
     }
 }

@@ -274,6 +274,24 @@ namespace Xem_Ngay.model.luc_thap_hoa_giap
             }
             return result;
         }
+        // tìm hoa giáp bằng tên quẻ
+        public static HoaGiap timHoaGiapBangTenQue(String tenque)
+        {
+            tenque = tenque.ToUpper();
+            foreach (HoaGiap hoaGiap in ALL60HOAGIAP)
+            {
+                if(hoaGiap.ques.Count  == 1)
+                {
+                    if (hoaGiap.ques[0].ten.ToUpper().IndexOf(tenque) > -1) return hoaGiap;
+                }else
+                {
+                    if (hoaGiap.ques[0].ten.ToUpper().IndexOf(tenque) > -1) return hoaGiap;
+                    if (hoaGiap.ques[1].ten.ToUpper().IndexOf(tenque) > -1) return hoaGiap;
+                }
+                
+            }
+            return null;
+        }
         // tìm tất cả các hoa giáp thoả mãn thuộc 1 dãy tên input
         public static List<HoaGiap> timHoaGiapThuoc1ListTen(List<String> listTen)
         {
